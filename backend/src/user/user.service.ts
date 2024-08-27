@@ -10,13 +10,23 @@ export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: mongoose.Model<User>,
   ) {}
+
   async create(createUserDto: CreateUserDto) {
-    const res = await this.userModel.create(createUserDto);
+    function extractUsername(emailString): string {
+      // Use regular expression to find the username before "@"
+      const username = emailString.split('@')[0];
+      return username;
+    }
+    const res = await this.userModel.create({
+      ...createUserDto,
+      username: extractUsername(createUserDto.email),
+    });
     return res;
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll() {
+    const users = await this.userModel.find();
+    return users;
   }
 
   findOne(id: number) {
