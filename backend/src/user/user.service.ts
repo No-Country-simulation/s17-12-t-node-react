@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User } from './user.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -27,7 +27,8 @@ export class UserService {
     return `This action updates a #${id} user`;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(id: number) {
+    const res = await this.userModel.findByIdAndDelete(id);
+    return res;
   }
 }
