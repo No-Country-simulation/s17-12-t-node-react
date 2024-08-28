@@ -7,7 +7,11 @@ import Link from "next/link";
 
 export default async function PerfilPage({ params }: { params: { name: string } }) {
 
-    const data = await fetch("/api")
+    const data = await fetch("http://localhost:3000/user")
+        .then(res => res.json())
+
+    console.log(data)
+
 
     return (
         <article className="text-center">
