@@ -10,7 +10,8 @@ import {
 
 import { AlbumService } from './album.service';
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
-import { ObjectIdValidationPipe } from 'src/common/pipes/object-id-validation.pipe';
+import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
+import { Types } from 'mongoose';
 
 @Controller('album')
 export class AlbumController {
@@ -21,9 +22,16 @@ export class AlbumController {
     return await this.albumService.findOneById(id);
   }
 
+  @Get('user/:userId')
+  async findAll(@Param('userId', ObjectIdValidationPipe) userId: string) {
+    return await this.albumService.findAllByUserId(userId);
+  }
+
   @Post()
   async create(@Body() createAlbumDto: CreateAlbumDto) {
-    return await this.albumService.create(createAlbumDto);
+    const userId = new Types.ObjectId('66cea5e3d77c7eeb9de94df5');
+
+    return await this.albumService.create(userId, createAlbumDto);
   }
 
   @Patch(':id')

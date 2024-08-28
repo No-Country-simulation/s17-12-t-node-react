@@ -2,7 +2,6 @@ import { Type } from 'class-transformer';
 import {
   IsArray,
   IsNumber,
-  IsObject,
   IsOptional,
   IsString,
   IsUrl,
@@ -35,7 +34,7 @@ export class CreateAlbumDto {
   @IsString()
   readonly description?: string;
 
-  @IsObject()
+  @IsOptional()
   @ValidateNested()
   @Type(() => Location)
   readonly location: Location;

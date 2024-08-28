@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
 import { Album } from './schemas';
@@ -13,8 +13,12 @@ export class AlbumService {
     private readonly albumModel: Model<Album>,
   ) { }
 
-  async create(createAlbumDto: CreateAlbumDto) {
-    const createdAlbum = await this.albumModel.create(createAlbumDto);
+  async create(userId: Types.ObjectId, createAlbumDto: CreateAlbumDto) {
+    const createdAlbum = await this.albumModel.create({
+      ...createAlbumDto,
+      userId: userId,
+    });
+
     return createdAlbum;
   }
 
@@ -42,5 +46,10 @@ export class AlbumService {
       throw new NotFoundException(`Album with ${id} not found`);
 
     return foundedAlbum;
+  }
+
+  async findAllByUserId(userId: string) {
+    const foundedAlbums = await this.albumModel.find({ userId });
+    return foundedAlbums;
   }
 }
