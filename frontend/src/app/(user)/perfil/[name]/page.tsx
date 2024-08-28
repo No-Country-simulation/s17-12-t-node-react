@@ -5,7 +5,10 @@ import Link from "next/link";
 
 
 
-export default function PerfilPage({ params }: { params: { name: string } }) {
+export default async function PerfilPage({ params }: { params: { name: string } }) {
+
+    const data = await fetch("/api")
+
     return (
         <article className="text-center">
             <h1 className="bg-[#D9D9D9] pt-10 font-bold text-xl">Mi Perfil</h1>
