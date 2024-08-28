@@ -1,0 +1,13 @@
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4
+    restart: always
+    environment:
+      TZ: "Europe/Madrid"
+      MONGO_INITDB_ROOT_USERNAME: "user"
+      MONGO_INITDB_ROOT_PASSWORD: "admin1"
+    volumes:
+      - ./mongoDataBase:/data/db
+    ports:
+      - 27018:27017
