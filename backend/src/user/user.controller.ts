@@ -24,13 +24,13 @@ export class UserController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<User> {
+    return this.userService.findOne(id);
   }
 
   @Patch(':id')

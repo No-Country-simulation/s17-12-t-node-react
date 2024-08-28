@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
@@ -24,13 +28,21 @@ export class UserService {
     return res;
   }
 
-  async findAll() {
+  async findAll(): Promise<User[]> {
     const users = await this.userModel.find();
     return users;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const isValidId = mongoose.isValidObjectId(id);
+    if (!isValidId) {
+      throw new BadRequestException('Please enter corrrect id');
+    }
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new NotFoundException('Task not found');
+    }
+    return user;
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
