@@ -45,7 +45,7 @@ export class UserController {
   @Delete(':id')
   @HttpCode(204)
   async remove(@Param('id') id: string): Promise<User> {
-    const task = await this.userService.remove(+id);
+    const task = await this.userService.remove(id);
     if (!task) throw new NotFoundException('Task not found');
     return;
   }

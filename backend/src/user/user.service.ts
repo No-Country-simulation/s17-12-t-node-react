@@ -15,7 +15,7 @@ export class UserService {
     @InjectModel(User.name) private userModel: mongoose.Model<User>,
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto): Promise<User> {
     function extractUsername(emailString): string {
       // Use regular expression to find the username before "@"
       const username = emailString.split('@')[0];
@@ -33,7 +33,7 @@ export class UserService {
     return users;
   }
 
-  async findOne(id: string) {
+  async findOne(id: string): Promise<User> {
     const isValidId = mongoose.isValidObjectId(id);
     if (!isValidId) {
       throw new BadRequestException('Please enter corrrect id');
@@ -45,7 +45,7 @@ export class UserService {
     return user;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
     console.log(updateUserDto);
     console.log(id);
     return await this.userModel.findByIdAndUpdate(id, updateUserDto, {
@@ -54,7 +54,7 @@ export class UserService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: string): Promise<User> {
     const res = await this.userModel.findByIdAndDelete(id);
     return res;
   }
