@@ -6,18 +6,16 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AlbumModule } from './album/album.module';
 
+import { UserModule } from './user/user.module';
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    MongooseModule.forRootAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGO_URL'),
-        user: configService.get<string>('MONGO_USERNAME'),
-        pass: configService.get<string>('MONGO_PASSWORD'),
-      }),
-    }),
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
+    MongooseModule.forRoot(process.env.DB_URI),
+
+    UserModule,
     AlbumModule,
   ],
   controllers: [AppController],
