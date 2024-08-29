@@ -1,6 +1,10 @@
 "use client"
-import Image from "next/image";
-import { useState } from "react";
+import { setUserTags } from "@/actions/userActions"
+import { User } from "@/interfaces/user"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { SubmitButton } from "./SubmitButton"
 
 const INITIAL_VALUES = [
   {
@@ -37,8 +41,14 @@ const INITIAL_VALUES = [
   }
 ]
 
-export default function PreferencesForm() {
-  const [tags, setTags] = useState<Array<String>>([])
+interface UserProps {
+  user: User
+}
+
+const PreferencesForm: React.FC<UserProps> = ({ user }) => {
+  const [tags, setTags] = useState<Array<string>>([])
+  const router = useRouter()
+  console.log(user)
 
   const handleSelect = (name: string) => {
     setTags((prevTags) =>
@@ -48,13 +58,20 @@ export default function PreferencesForm() {
     )
   }
 
-  const handleSubmit = () => {
-    //Aca se hace un PUT al endpoint de user para agregar las tags
-    console.log(tags)
-  };
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    try {
+      const responseData = await setUserTags(user, tags)
+      if (responseData && responseData.tags.length > 0) {
+        router.push('/')
+      }
+    } catch (error) {
+      console.error('Error al actualizar los tags:', error)
+    }
+  }
 
   return (
-    <div className="mt-16 mx-6 flex flex-col gap-8">
+    <form onSubmit={handleSubmit} className="mt-16 mx-6 flex flex-col gap-8">
       <p>Seleccioná los temas que más te interesan para que podamos guiarte a encontrar las mejores opciones</p>
       <div className="flex flex-wrap gap-10">
         {INITIAL_VALUES.map((item) => (
@@ -74,11 +91,8 @@ export default function PreferencesForm() {
           </div>
         ))}
       </div>
-      <button
-        type="button"
-        onClick={handleSubmit}
-        className="text-xl bg-slate-400 rounded h-12 mb-8 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]"
-      >Ingresá</button>
-    </div>
-  );
+      <SubmitButton className="text-xl bg-slate-400 rounded h-12 mb-8 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Ingresá" />
+    </form>
+  )
 }
+export default PreferencesForm

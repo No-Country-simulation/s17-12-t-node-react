@@ -1,4 +1,4 @@
-import RegisterForm from "@/components/RegisterForm";
+import RegisterForm from "@/components/RegisterForm"
 
 export default function RegisterPage() {
   return (
@@ -6,5 +6,5 @@ export default function RegisterPage() {
       <h2 className="p-1 absolute top-0 text-base w-full bg-gray-300 text-center">Registrate</h2>
       <RegisterForm />
     </div>
-  );
+  )
 }
