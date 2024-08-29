@@ -7,7 +7,7 @@ export interface User {
   password: string
   country: string
   tags: string[]
-  isAdmin: false
+  isAdmin: boolean
   description: string
   imageUrl: string
 }
@@ -15,7 +15,7 @@ export interface User {
 export interface RegisterUser {
   email: string
   password: string
-  isAdmin: false
+  isAdmin: boolean
 }
 
 export interface InitialUser {
@@ -24,5 +24,5 @@ export interface InitialUser {
   email: string
   password: string
   tags: string[]
-  isAdmin: false
+  isAdmin: boolean
 }
