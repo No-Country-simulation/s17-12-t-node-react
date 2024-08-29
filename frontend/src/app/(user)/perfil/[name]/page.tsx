@@ -2,22 +2,28 @@
 import Image from "next/image";
 import imageUser from "/public/image/avatarUser.png"
 import Link from "next/link";
+import { IoSettingsSharp } from "react-icons/io5";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 
 
 export default async function PerfilPage({ params }: { params: { name: string } }) {
 
-    const data = await fetch("http://localhost:3000/user")
-        .then(res => res.json())
+    // const data = await fetch("http://localhost:3000/user")
+    //     .then(res => res.json())
 
-    console.log(data)
+    // console.log(data)
 
 
     return (
-        <article className="text-center">
-            <h1 className="bg-[#D9D9D9] pt-10 font-bold text-xl">Mi Perfil</h1>
+        <article >
+            <div className="flex justify-between bg-[#D9D9D9] pt-10 pb-2 px-2">
+                <IoMdArrowRoundBack size={30} />
+                <h1 className=" font-bold text-xl">Mi Perfil</h1>
+                <IoSettingsSharp size={30} />
+            </div>
             <Image src={imageUser} alt="Avatar" className="mx-auto my-5" />
-            <h2 className="font-bold text-2xl">{params.name}</h2>
+            <h2 className="font-bold text-2xl text-center">{params.name}</h2>
             <div>
                 <ul className="flex justify-between text-2xl px-4 py-4">
                     <li className="bg-[#979797] text-[#EFEFEF] px-6 py-1 rounded-full">
