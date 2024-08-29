@@ -24,13 +24,13 @@ export default async function PerfilPage({ params }: { params: { name: string } 
             <h2 className="font-bold text-2xl text-center">{params.name}</h2>
             <div>
                 <ul className="flex justify-between text-2xl px-4 py-4">
-                    <li className="bg-[#979797] text-[#EFEFEF] px-6 py-1 rounded-full">
+                    <li className="bg-[#FA8888] text-[#EFEFEF] px-6 py-1 rounded-full">
                         <Link href={"/"}>Album</Link>
                     </li>
-                    <li>
+                    <li className="text-[#F87D7D]">
                         <Link href={"/"}>Like</Link>
                     </li>
-                    <li>
+                    <li className="text-[#F87D7D]">
                         <Link href={"/"}>Etiquetas</Link>
                     </li>
                 </ul>
