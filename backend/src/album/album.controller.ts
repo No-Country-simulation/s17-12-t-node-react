@@ -12,6 +12,7 @@ import { AlbumService } from './album.service';
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
 import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
 import { Types } from 'mongoose';
+import { Auth } from '../auth/decorators/auth.decorator';
 
 @Controller('album')
 export class AlbumController {
@@ -28,6 +29,7 @@ export class AlbumController {
   }
 
   @Post()
+  @Auth()
   async create(@Body() createAlbumDto: CreateAlbumDto) {
     const userId = new Types.ObjectId('66cea5e3d77c7eeb9de94df5');
 
@@ -35,6 +37,7 @@ export class AlbumController {
   }
 
   @Patch(':id')
+  @Auth()
   async update(
     @Param('id', ObjectIdValidationPipe) id: string,
     @Body() updateAlbumDto: UpdateAlbumDto,
@@ -43,6 +46,7 @@ export class AlbumController {
   }
 
   @Delete(':id')
+  @Auth()
   async delete(@Param('id', ObjectIdValidationPipe) id: string) {
     return await this.albumService.delete(id);
   }
