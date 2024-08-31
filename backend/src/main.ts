@@ -12,22 +12,21 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,
-      transform: true
+      transform: true,
     }),
   );
-  
+
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('API')
     .setVersion('1.0')
-    .addTag('cats')
+    .addBearerAuth()
     .build();
-  
+
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
   const PORT = process.env.PORT;
-  
+
   await app.listen(PORT);
 
   console.log(`http://localhost:${PORT}/api/v1`);
