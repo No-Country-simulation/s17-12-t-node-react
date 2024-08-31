@@ -13,7 +13,9 @@ import { CreateAlbumDto, UpdateAlbumDto } from './dto';
 import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
 import { Types } from 'mongoose';
 import { Auth } from '../auth/decorators/auth.decorator';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Album')
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) { }
@@ -28,6 +30,7 @@ export class AlbumController {
     return await this.albumService.findAllByUserId(userId);
   }
 
+  @ApiBearerAuth()
   @Post()
   @Auth()
   async create(@Body() createAlbumDto: CreateAlbumDto) {
@@ -36,6 +39,7 @@ export class AlbumController {
     return await this.albumService.create(userId, createAlbumDto);
   }
 
+  @ApiBearerAuth()
   @Patch(':id')
   @Auth()
   async update(
@@ -45,6 +49,7 @@ export class AlbumController {
     return await this.albumService.update(id, updateAlbumDto);
   }
 
+  @ApiBearerAuth()
   @Delete(':id')
   @Auth()
   async delete(@Param('id', ObjectIdValidationPipe) id: string) {
