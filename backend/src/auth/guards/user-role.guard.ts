@@ -1,15 +1,15 @@
 import {
+  BadRequestException,
   type CanActivate,
   type ExecutionContext,
-  Injectable,
-  BadRequestException,
   ForbiddenException,
+  Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { type Observable } from 'rxjs';
 
+import { META_ROLE } from '../../auth/decorators';
 import { type User } from '../../user/entities/user.entity';
-import { META_ROLE } from '../../auth/decorators/role-protected.decorator';
 
 @Injectable()
 export class UserRoleGuard implements CanActivate {
@@ -22,11 +22,15 @@ export class UserRoleGuard implements CanActivate {
       META_ROLE,
       context.getHandler(),
     );
+
     if (!isAdmin) return true;
+
     const req = context.switchToHttp().getRequest();
     const user = req.user as User;
+
     if (!user) throw new BadRequestException('User not found');
     if (user.isAdmin) return true;
+
     throw new ForbiddenException(`User not authorized`);
   }
 }
