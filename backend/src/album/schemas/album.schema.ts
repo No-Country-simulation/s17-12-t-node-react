@@ -1,16 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-import { Location, LocationSchema } from './location.schema';
-import { Photo, PhotoSchema } from './photo.schema';
 import { Types } from 'mongoose';
 
-@Schema()
-export class User {
-  @Prop({ trim: true })
-  name: string;
-}
-
-export const UserSchema = SchemaFactory.createForClass(User);
+import { User } from '../../user/entities/user.entity';
+import { Location, LocationSchema } from './location.schema';
+import { Photo, PhotoSchema } from './photo.schema';
 
 @Schema({
   timestamps: true,
