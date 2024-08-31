@@ -1,19 +1,25 @@
 import {
-  Controller,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
   Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
 
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Types } from 'mongoose';
+
+import { GetUser } from '../auth/decorators';
+import { type User } from '../user/entities/user.entity';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
 import { AlbumService } from './album.service';
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
-import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
-import { Types } from 'mongoose';
-import { Auth } from '../auth/decorators/auth.decorator';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+
+//! refactor in the future
+type UserTemporalType = User & { _id: Types.ObjectId };
 
 @ApiTags('Album')
 @Controller('album')
@@ -33,10 +39,11 @@ export class AlbumController {
   @ApiBearerAuth()
   @Post()
   @Auth()
-  async create(@Body() createAlbumDto: CreateAlbumDto) {
-    const userId = new Types.ObjectId('66cea5e3d77c7eeb9de94df5');
-
-    return await this.albumService.create(userId, createAlbumDto);
+  async create(
+    @GetUser() user: UserTemporalType,
+    @Body() createAlbumDto: CreateAlbumDto,
+  ) {
+    return await this.albumService.create(user._id, createAlbumDto);
   }
 
   @ApiBearerAuth()
