@@ -1,18 +1,27 @@
 import {
-  Controller,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
   Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
 
-import { AlbumService } from './album.service';
-import { CreateAlbumDto, UpdateAlbumDto } from './dto';
-import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Types } from 'mongoose';
 
+import { GetUser } from '../auth/decorators';
+import { type User } from '../user/entities/user.entity';
+import { Auth } from '../auth/decorators/auth.decorator';
+import { ObjectIdValidationPipe } from '../common/pipes/object-id-validation.pipe';
+import { AlbumService } from './album.service';
+import { CreateAlbumDto, UpdateAlbumDto } from './dto';
+
+//! refactor in the future
+type UserTemporalType = User & { _id: Types.ObjectId };
+
+@ApiTags('Album')
 @Controller('album')
 export class AlbumController {
   constructor(private readonly albumService: AlbumService) { }
@@ -27,14 +36,19 @@ export class AlbumController {
     return await this.albumService.findAllByUserId(userId);
   }
 
+  @ApiBearerAuth()
   @Post()
-  async create(@Body() createAlbumDto: CreateAlbumDto) {
-    const userId = new Types.ObjectId('66cea5e3d77c7eeb9de94df5');
-
-    return await this.albumService.create(userId, createAlbumDto);
+  @Auth()
+  async create(
+    @GetUser() user: UserTemporalType,
+    @Body() createAlbumDto: CreateAlbumDto,
+  ) {
+    return await this.albumService.create(user._id, createAlbumDto);
   }
 
+  @ApiBearerAuth()
   @Patch(':id')
+  @Auth()
   async update(
     @Param('id', ObjectIdValidationPipe) id: string,
     @Body() updateAlbumDto: UpdateAlbumDto,
@@ -42,7 +56,9 @@ export class AlbumController {
     return await this.albumService.update(id, updateAlbumDto);
   }
 
+  @ApiBearerAuth()
   @Delete(':id')
+  @Auth()
   async delete(@Param('id', ObjectIdValidationPipe) id: string) {
     return await this.albumService.delete(id);
   }

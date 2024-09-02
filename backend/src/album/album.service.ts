@@ -40,16 +40,15 @@ export class AlbumService {
   }
 
   async findOneById(id: string) {
-    const foundedAlbum = await this.albumModel.findById(id);
+    const foundAlbum = await this.albumModel.findById(id);
 
-    if (!foundedAlbum)
-      throw new NotFoundException(`Album with ${id} not found`);
+    if (!foundAlbum) throw new NotFoundException(`Album with ${id} not found`);
 
-    return foundedAlbum;
+    return foundAlbum;
   }
 
   async findAllByUserId(userId: string) {
-    const foundedAlbums = await this.albumModel.find({ userId });
-    return foundedAlbums;
+    const foundAlbums = await this.albumModel.find({ userId });
+    return foundAlbums;
   }
 }
