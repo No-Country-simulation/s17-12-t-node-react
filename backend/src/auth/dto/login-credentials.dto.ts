@@ -1,27 +1,13 @@
+import { IsEmail, IsString, Length, Matches } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsEmail,
-  IsNotEmpty,
-  IsOptional,
-  IsString,
-  Length,
-  Matches,
-} from 'class-validator';
 
-export class CreateUserDto {
-  @IsOptional()
-  @IsString()
-  firstname: string;
-
-  @IsOptional()
-  @IsString()
-  lastname: string;
-
-  @IsNotEmpty()
-  @IsString()
+export class LoginCredentialsDto {
+  @ApiProperty({
+    description: "The user's email address",
+    example: 'user@example.com',
+  })
   @IsEmail()
-  email: string;
+  readonly email: string;
 
   @ApiProperty({
     description:
@@ -47,24 +33,5 @@ export class CreateUserDto {
     message:
       'The password must have at least one special character (for example, @, $, !, %, *, ?, &, #)',
   })
-  password: string;
-
-  @IsOptional()
-  @IsString()
-  country: string;
-
-  @IsOptional()
-  tags: [string];
-
-  @IsNotEmpty()
-  @IsBoolean()
-  isAdmin: boolean;
-
-  @IsOptional()
-  @IsString()
-  description: string;
-
-  @IsOptional()
-  @IsString()
-  imageUrl: string;
+  readonly password: string;
 }

@@ -58,4 +58,13 @@ export class UserService {
     const res = await this.userModel.findByIdAndDelete(id);
     return res;
   }
+
+  async findOneByEmail(email: string) {
+    const userFound = await this.userModel.findOne({ email });
+
+    if (!userFound)
+      throw new NotFoundException(`User with email ${email} not exists`);
+
+    return userFound;
+  }
 }
