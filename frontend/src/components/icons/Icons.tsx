@@ -1,6 +1,7 @@
 import { BsChatDots } from "react-icons/bs";
 import { FaHeart, FaHome, FaRegBookmark, FaRegHeart, FaRegImage, FaUser } from "react-icons/fa"
-import { IoLocationSharp, IoSearchSharp } from "react-icons/io5";
+import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoLocationSharp, IoSearchSharp, IoSettingsSharp } from "react-icons/io5";
 import { LiaPaperPlaneSolid } from "react-icons/lia";
 import { LuPlusCircle } from "react-icons/lu";
 
@@ -41,4 +42,10 @@ export const IconChat = ({ className, size = 30 }: IconProps) => {
 }
 export const IconPaper = ({ className, size = 30 }: IconProps) => {
     return <LiaPaperPlaneSolid size={size} className={className} />
+}
+export const IconFlechaAtras = ({ className, size = 30 }: IconProps) => {
+    return <IoMdArrowRoundBack size={size} className={className} />
+}
+export const IconConfig = ({ className, size = 30 }: IconProps) => {
+    return <IoSettingsSharp size={size} className={className} />
 } 

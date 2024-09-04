@@ -1,6 +1,6 @@
 
+import { IconConfig, IconFlechaAtras } from "@/components/icons";
 import imageUser from "/public/image/avatarUser.png"
-import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoSettingsSharp } from "react-icons/io5";
 import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
@@ -11,9 +11,9 @@ export default async function PerfilPage({ params }: { params: { name: string } 
     return (
         <article >
             <div className="flex justify-between bg-[#D9D9D9] pt-10 pb-2 px-2 text-[#979797]">
-                <IoMdArrowRoundBack size={30} />
+                <IconFlechaAtras />
                 <h1 className=" font-bold text-xl text-black">Mi Perfil</h1>
-                <IoSettingsSharp size={30} />
+                <IconConfig />
             </div>
             <Image src={imageUser} alt="Avatar" className="mx-auto my-5" />
             <h2 className="font-bold text-2xl text-center">{params.name}</h2>

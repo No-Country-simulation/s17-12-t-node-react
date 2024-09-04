@@ -5,7 +5,7 @@ import userImage from "/public/feed/user/image7.jpg"
 
 export function CardFeed() {
     return (
-        <div className="my-8">
+        <div className="mt-10">
 
             {/* AVATAR Y LOCATION  */}
             <div className="flex justify-between px-4 text-TextPrimary">

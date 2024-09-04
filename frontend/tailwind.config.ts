@@ -18,6 +18,9 @@ const config: Config = {
 
         // textos
         "TextPrimary": "#6C7263"
+      },
+      dropShadow: {
+        "button": "0 4px 3px #999"
       }
     },
   },
