@@ -1,1 +1,1 @@
-export { IconHome, IconImage, IconSearch, IconUser, IconBook, IconPlusCircle, IconLocation } from "./Icons"
+export { IconHome, IconImage, IconSearch, IconUser, IconBook, IconPlusCircle, IconLocation, IconCorazon, IconChat, IconPaper, IconCorazonLleno } from "./Icons"

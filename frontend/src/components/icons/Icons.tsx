@@ -1,5 +1,7 @@
-import { FaHome, FaRegBookmark, FaRegImage, FaUser } from "react-icons/fa"
+import { BsChatDots } from "react-icons/bs";
+import { FaHeart, FaHome, FaRegBookmark, FaRegHeart, FaRegImage, FaUser } from "react-icons/fa"
 import { IoLocationSharp, IoSearchSharp } from "react-icons/io5";
+import { LiaPaperPlaneSolid } from "react-icons/lia";
 import { LuPlusCircle } from "react-icons/lu";
 
 interface IconProps {
@@ -27,4 +29,16 @@ export const IconBook = ({ className, size = 30 }: IconProps) => {
 }
 export const IconLocation = ({ className, size = 30 }: IconProps) => {
     return <IoLocationSharp size={size} className={className} />
+}
+export const IconCorazon = ({ className, size = 30 }: IconProps) => {
+    return <FaRegHeart size={size} className={className} />
+}
+export const IconCorazonLleno = ({ className, size = 30 }: IconProps) => {
+    return <FaHeart size={size} className={className} />
+}
+export const IconChat = ({ className, size = 30 }: IconProps) => {
+    return <BsChatDots size={size} className={className} />
+}
+export const IconPaper = ({ className, size = 30 }: IconProps) => {
+    return <LiaPaperPlaneSolid size={size} className={className} />
 } 

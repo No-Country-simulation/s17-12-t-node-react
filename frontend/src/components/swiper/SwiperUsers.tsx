@@ -2,6 +2,8 @@
 
 import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
+import { ImagesUser } from "@/utils/ImagesUser"
+import Image from "next/image"
 
 export function SwiperUsers() {
     return (
@@ -10,11 +12,10 @@ export function SwiperUsers() {
             slidesPerView={4}
         >
             {
-                Array.from({ length: 8 }).map((v, i) => (
+                ImagesUser.map((user, i) => (
                     <SwiperSlide key={i} >
-                        <div className="size-20 rounded-full bg-gray-500">
-                        </div>
-                        <h2 className="text-center">Nombre</h2>
+                        <Image src={user.url} alt="foto" className="rounded-full object-cover size-20" />
+                        <h2 className="text-center">{user.name}</h2>
                     </SwiperSlide>
                 ))
             }
