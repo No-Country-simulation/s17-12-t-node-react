@@ -13,9 +13,9 @@ export function SwiperUsers() {
         >
             {
                 ImagesUser.map((user, i) => (
-                    <SwiperSlide key={i} >
+                    <SwiperSlide key={i} style={{ "display": "flex", "flexDirection": "column", "alignItems": "center", }}>
                         <Image src={user.url} alt="foto" className="rounded-full object-cover size-20" />
-                        <h2 className="text-center">{user.name}</h2>
+                        <h2 className="text-center flex-col">{user.name}</h2>
                     </SwiperSlide>
                 ))
             }
