@@ -20,7 +20,9 @@ const SearchResults: React.FC<Props> = async ({ query }) => {
         <>
           {results.map((item) => (
             <div key={item.title} className="flex border border-gray-300 p-1 mx-4 gap-4 items-center">
-              <Image src={item.photos[0].url} alt={item.photos[0].description} width={100} height={62} className="rounded-2xl" />
+              {item.photos[0] && (
+                <Image src={item.photos[0].url} alt={item.photos[0].description} width={100} height={62} className="rounded-2xl" />
+              )}
               <div>
                 <h3 className="font-semibold text-xl mb-1">{item.title}</h3>
                 {/* <div className="flex gap-1 flex-wrap">
