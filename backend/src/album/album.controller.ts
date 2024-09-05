@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -24,7 +25,12 @@ type UserTemporalType = User & { _id: Types.ObjectId };
 @ApiTags('Album')
 @Controller('album')
 export class AlbumController {
-  constructor(private readonly albumService: AlbumService) { }
+  constructor(private readonly albumService: AlbumService) {}
+
+  @Get('search')
+  async searchAlbums(@Query('q') query: string) {
+    return await this.albumService.searchAlbums(query);
+  }
 
   @Get(':id')
   async findOne(@Param('id', ObjectIdValidationPipe) id: string) {
