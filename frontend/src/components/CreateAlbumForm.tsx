@@ -20,8 +20,10 @@ export default function CreateAlbumForm() {
   const [markerCoordinates, setMarkerCoordinates] = useState<Country | null>(null)
   const [albumImages, setAlbumImages] = useState<PhotoFromAlbum[]>([])
   const [tags, setTags] = useState<string[]>([])
-  const [confirmSend, setConfirmSend] = useState<boolean>(false)
-  const createAlbumComplete = createAlbumAction.bind(null, albumImages, markerCoordinates, tags, confirmSend, setConfirmSend)
+  /* const [confirmSend, setConfirmSend] = useState<boolean>(false) */
+  //cambiar por una cookie
+  const token = localStorage.getItem('token')
+  const createAlbumComplete = createAlbumAction.bind(null, albumImages, markerCoordinates, tags, token)
   const [formState, formAction] = useFormState(
     createAlbumComplete,
     INITIAL_STATE
@@ -43,6 +45,8 @@ export default function CreateAlbumForm() {
     }
   }
 
+  //Aca hay que cambiar la logica para que pueda borrar imagenes si se arrepintio de subir alguna imagen
+  //cuando se hace la peticion a uploadImage hay que hacer que devuelva un objeto con el delete_token
   const deleteImage = (url: string) => {
     const newAlbumImages = albumImages.filter((item) => item.url !== url)
     setAlbumImages(newAlbumImages)
@@ -131,7 +135,7 @@ export default function CreateAlbumForm() {
       )}
 
       {/* tengo que cambiar esto por la vista de album individual */}
-      {confirmSend && (
+      {/* {confirmSend && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 className="text-xl font-bold mb-4">Vista Previa del Álbum</h2>
@@ -157,10 +161,10 @@ export default function CreateAlbumForm() {
             </button>
           </div>
         </div>
-      )}
+      )} */}
 
-      <SubmitButton className="text-xl bg-slate-400 rounded h-12 mx-4 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Guardar" />
-      {formState?.registerError && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.message}: {formState?.registerError}</p>}
+      <SubmitButton className="text-xl bg-slate-400 rounded h-12 mx-4 mb-4 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Guardar" />
+      {formState?.createAlbumError && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.message}: {formState?.createAlbumError}</p>}
       {formState?.success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{formState?.success}</p>}
     </form>
   )

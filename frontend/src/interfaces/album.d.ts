@@ -7,8 +7,8 @@ export interface Album {
 }
 
 export interface Country {
-  description: string
-  latitude: number
+  /*   description: string
+   */ latitude: number
   longitude: number
 }
 

@@ -1,35 +1,52 @@
+'use server'
 import { Country, PhotoFromAlbum } from '@/interfaces/album'
+import { createAlbumService } from '@/services/albumService'
 
 export async function createAlbumAction(
   albumImages: PhotoFromAlbum[],
   markerCoordinates: Country | null,
   tags: string[],
-  confirmSend: boolean,
-  setConfirmSend: (confirmSend: boolean) => void,
+  token: string | null,
   prevState: any,
   formData: FormData
 ) {
   const title = formData.get('title') as string
   const description = formData.get('description') as string
+  console.log(token)
   const fields = {
     title: title,
     description: description,
     location: {
-      description: markerCoordinates?.description,
-      latitude: markerCoordinates?.latitude,
-      longitude: markerCoordinates?.longitude,
+      /*       description: markerCoordinates?.description, */
+      latitude: markerCoordinates?.latitude as number,
+      longitude: markerCoordinates?.longitude as number,
     },
     photos: albumImages,
     tags: tags,
   }
 
-  if (!confirmSend) {
-    setConfirmSend(true)
-    return { ...prevState }
-  } else {
-    console.log(fields)
-    return { ...prevState }
+  console.log(fields)
+  const responseData = await createAlbumService(token, fields)
+  console.log(responseData)
+
+  if (!responseData) {
+    return {
+      ...prevState,
+      errors: {},
+      createAlbumError: null,
+      message: 'Ops! Something went wrong. Please try again',
+    }
   }
+
+  if (responseData.message) {
+    return {
+      ...prevState,
+      errors: {},
+      createAlbumError: responseData.message,
+      message: 'Failed to Post Album',
+    }
+  }
+  return { ...prevState, success: 'Creado con exito' }
 }
 
 export async function updateAlbumAction(
