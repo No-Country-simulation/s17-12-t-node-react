@@ -9,7 +9,7 @@ export function BackArrow() {
 
     return (
         <div onClick={router.back}>
-            <IconFlechaAtras className="ml-10 text-gray-500" />
+            <IconFlechaAtras className="text-gray-500 cursor-pointer" />
         </div>
     )
 }
