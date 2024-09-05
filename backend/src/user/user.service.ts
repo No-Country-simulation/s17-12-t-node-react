@@ -8,7 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from './entities/user.entity';
-
+import { HashAdapter } from 'src/common/adapters/hash.adapter';
 @Injectable()
 export class UserService {
   constructor(
@@ -21,8 +21,13 @@ export class UserService {
       const username = emailString.split('@')[0];
       return username;
     }
+
+    const hashAdapter = new HashAdapter();
+    const hashedPassword = hashAdapter.createHash(createUserDto.password, 10);
+
     const res = await this.userModel.create({
       ...createUserDto,
+      password: hashedPassword,
       username: extractUsername(createUserDto.email),
     });
     return res;

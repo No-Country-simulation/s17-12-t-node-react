@@ -5,6 +5,8 @@ import { Types } from 'mongoose';
 import { User } from '../../user/entities/user.entity';
 import { Location, LocationSchema } from './location.schema';
 import { Photo, PhotoSchema } from './photo.schema';
+import { Like, LikeSchema } from './like.schema';
+import { CommentSchema } from './comment.schema';
 
 @Schema({
   timestamps: true,
@@ -34,6 +36,12 @@ export class Album {
 
   @Prop({ type: Types.ObjectId, ref: User.name, required: true })
   userId: Types.ObjectId;
+
+  @Prop({ type: [LikeSchema] })
+  likes?: Like[];
+
+  @Prop({ type: [CommentSchema] })
+  comments?: Comment[];
 }
 
 export const AlbumSchema = SchemaFactory.createForClass(Album);
