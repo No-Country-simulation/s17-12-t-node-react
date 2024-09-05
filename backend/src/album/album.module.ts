@@ -10,5 +10,6 @@ import { Album, AlbumSchema } from './schemas/album.schema';
   ],
   controllers: [AlbumController],
   providers: [AlbumService],
+  exports: [AlbumService, MongooseModule],
 })
 export class AlbumModule { }

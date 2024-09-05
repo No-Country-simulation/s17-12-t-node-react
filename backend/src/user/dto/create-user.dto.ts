@@ -54,7 +54,7 @@ export class CreateUserDto {
   country: string;
 
   @IsOptional()
-  tags: [string];
+  tags: string[];
 
   @IsNotEmpty()
   @IsBoolean()

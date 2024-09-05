@@ -22,8 +22,10 @@ export class UserService {
       const username = emailString.split('@')[0];
       return username;
     }
+
     const hashAdapter = new HashAdapter();
     const hashedPassword = hashAdapter.createHash(createUserDto.password, 10);
+    
     const res = await this.userModel.create({
       ...createUserDto,
       password: hashedPassword,
