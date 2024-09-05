@@ -26,3 +26,15 @@ export interface InitialUser {
   tags: string[]
   isAdmin: boolean
 }
+
+export type UserWithoutId = Omit<User, '_id'>
+export type LoginUser = Omit<RegisterUser, 'isAdmin'>
+
+export interface LoggedUser {
+  id: string
+  username: string
+  email: string
+  password: string
+  isAdmin: boolean
+  token: string
+}

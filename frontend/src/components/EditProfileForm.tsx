@@ -13,7 +13,7 @@ const INITIAL_STATE = {
 }
 
 interface EditProfileProps {
-  user: User | InitialUser
+  user: User
 }
 
 const EditProfileForm: React.FC<EditProfileProps> = ({ user }) => {
