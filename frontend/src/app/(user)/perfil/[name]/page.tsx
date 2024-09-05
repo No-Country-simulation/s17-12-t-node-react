@@ -1,6 +1,6 @@
 
 import { IconConfig, IconFlechaAtras } from "@/components/icons";
-import imageUser from "/public/image/avatarUser.png"
+import imageUser from "/public/feed/paisaje.jpg"
 import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,19 +14,21 @@ export default async function PerfilPage({ params }: { params: { name: string } 
                 <h1 className=" font-bold text-xl text-black">Mi Perfil</h1>
                 <IconConfig />
             </div>
-            <Image src={imageUser} alt="Avatar" className="mx-auto my-5" />
-            <h2 className="font-bold text-2xl text-center">{params.name}</h2>
+            <div className="flex items-center ml-8 gap-3 my-6">
+                <figure className="relative size-20 rounded-full overflow-hidden">
+                    <Image src={imageUser} alt="Avatar" className="object-cover" fill />
+                </figure>
+                <h2 className="font-bold text-2xl ">{params.name}</h2>
+            </div>
             <div>
                 <ul className="flex justify-between text-2xl px-4 py-4">
-                    <li className="bg-[#FA8888] text-[#EFEFEF] px-6 py-1 rounded-full">
+                    <li className="bg-[#6C7263] text-[#EFEFEF] px-6 py-1 rounded-full">
                         <Link href={"/"}>Album</Link>
                     </li>
-                    <li className="text-[#F87D7D]">
-                        <Link href={"/"}>Like</Link>
+                    <li className="text-TextPrimary">
+                        <Link href={"/"}>A visitar</Link>
                     </li>
-                    <li className="text-[#F87D7D]">
-                        <Link href={"/"}>Etiquetas</Link>
-                    </li>
+
                 </ul>
 
                 <div className="grid grid-cols-3 gap-2 px-3 ">
