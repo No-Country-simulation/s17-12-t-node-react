@@ -39,7 +39,7 @@ export class User {
   country: string;
 
   @Prop()
-  tags: [string];
+  tags: string[];
 
   @Prop({
     default: false,

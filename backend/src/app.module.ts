@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
+import { SeederModule } from './seeder/seeder.module';
 
 @Module({
   imports: [
@@ -17,6 +18,9 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     AlbumModule,
     AuthModule,
+
+    // execute seed only in develop environment
+    ...(process.env.NODE_ENV === 'development' ? [SeederModule] : []),
   ],
   controllers: [AppController],
   providers: [AppService],
