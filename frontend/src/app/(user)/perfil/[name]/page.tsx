@@ -1,6 +1,7 @@
 
-import { IconConfig, IconFlechaAtras } from "@/components/icons";
 import imageUser from "/public/feed/paisaje.jpg"
+import { IconConfig } from "@/components/icons";
+import { BackArrow } from "@/components";
 import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +11,8 @@ export default async function PerfilPage({ params }: { params: { name: string } 
     return (
         <article >
             <div className="flex justify-between bg-[#D9D9D9] pt-10 pb-2 px-2 text-[#979797]">
-                <IconFlechaAtras />
+                <BackArrow />
+
                 <h1 className=" font-bold text-xl text-black">Mi Perfil</h1>
                 <IconConfig />
             </div>
@@ -28,7 +30,6 @@ export default async function PerfilPage({ params }: { params: { name: string } 
                     <li className="text-TextPrimary">
                         <Link href={"/"}>A visitar</Link>
                     </li>
-
                 </ul>
 
                 <div className="grid grid-cols-3 gap-2 px-3 ">

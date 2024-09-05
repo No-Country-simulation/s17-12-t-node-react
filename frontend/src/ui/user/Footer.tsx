@@ -11,10 +11,10 @@ export function Footer() {
             </Link>
 
             <div className="grow flex justify-center ss:justify-evenly">
-                <div className="flex flex-col items-center justify-center">
+                <Link href={"/search"} className="flex flex-col items-center justify-center">
                     <IconSearch />
                     <p>Buscar</p>
-                </div>
+                </Link>
 
                 <div className="flex flex-col items-center rounded-full  size-[70px] justify-center relative -top-10 bg-FondoPrimary ss:size-24">
                     <IconPlusCircle size={50} />

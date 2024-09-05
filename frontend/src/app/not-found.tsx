@@ -1,13 +1,15 @@
 import Image from "next/image";
 import notfound from "/public/notFound/404.png"
-import { IconFlechaAtras } from "@/components/icons";
 import Link from "next/link";
+import { BackArrow } from "@/components";
 
 export default function NotFoundPage() {
     return (
-        <div className="">
-            <IconFlechaAtras className="ml-10 text-gray-500 my-10" />
-            <div className="flex flex-col items-center pl-20">
+        <div className="h-screen flex flex-col py-10">
+
+            <BackArrow />
+
+            <div className="flex flex-col items-center pl-20 grow justify-center">
                 <Image src={notfound} alt="404" />
                 <p className="text-center mr-20 text-TextPrimary font-bold">ooh !! <br /> por aquí  no es:)
                 </p>
