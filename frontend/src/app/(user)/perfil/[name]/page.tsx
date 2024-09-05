@@ -1,7 +1,6 @@
 
 import { IconConfig, IconFlechaAtras } from "@/components/icons";
 import imageUser from "/public/image/avatarUser.png"
-import { IoSettingsSharp } from "react-icons/io5";
 import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
