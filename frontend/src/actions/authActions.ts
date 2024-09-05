@@ -1,4 +1,22 @@
 'use server'
+import { z } from 'zod'
+
+const schemaRegister = z
+  .object({
+    email: z.string({ message: 'Introduzca un email' }).email({
+      message: 'La direccion de email es invalida. '
+    }),
+    password: z.string({ message: 'Introduzca una contraseña' }).min(6, {
+      message: 'La contraseña es muy corta. '
+    }),
+    repeatPassword: z.string().min(6, {
+      message: 'La contraseña es muy corta. '
+    })
+  })
+  .refine((data) => data.password === data.repeatPassword, {
+    message: 'Las contraseñas no coinciden. ',
+    path: ['repeatPassword']
+  })
 
 import { RegisterUser } from '@/interfaces/user'
 import { registerUserService } from '@/services/authServices'
@@ -7,42 +25,18 @@ import { redirect } from 'next/navigation'
 export async function registerUserAction(prevState: any, formData: FormData) {
   const emailFromForm = formData.get('email') as string
   const passwordFromForm = formData.get('password') as string
-  const repeatPasswordFromForm = formData.get('repeatPassword') as string
 
-  const validateForm = () => {
-    const newErrors = {
-      email: '',
-      password: '',
-      repeatPassword: ''
-    }
+  const validatedFields = schemaRegister.safeParse({
+    email: emailFromForm,
+    password: passwordFromForm,
+    repeatPassword: formData.get('repeatPassword')
+  })
 
-    if (!emailFromForm) {
-      newErrors.email = 'El email es requerido'
-    } else if (!/\S+@\S+\.\S+/.test(emailFromForm)) {
-      newErrors.email = 'El email no es válido'
-    }
-
-    if (!passwordFromForm) {
-      newErrors.password = 'La contraseña es requerida'
-    } else if (passwordFromForm.length < 4) {
-      newErrors.password = 'La contraseña debe tener al menos 4 caracteres'
-    }
-
-    if (!repeatPasswordFromForm) {
-      newErrors.repeatPassword = 'Campo requerido'
-    } else if (passwordFromForm !== repeatPasswordFromForm) {
-      newErrors.repeatPassword = 'Las contraseñas no coinciden'
-    }
-
-    return newErrors
-  }
-
-  const errors = validateForm()
-
-  if (errors.email || errors.password || errors.repeatPassword) {
+  if (!validatedFields.success) {
     return {
       ...prevState,
-      errors
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Debe rellenar todos los campos. Error al Registrarse.'
     }
   }
 

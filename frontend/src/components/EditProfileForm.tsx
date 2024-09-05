@@ -145,6 +145,7 @@ const EditProfileForm: React.FC<EditProfileProps> = ({ user }) => {
           required
         />
       </div>
+      {formState?.errors?.email && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.errors?.email}</p>}
 
       <div className="flex items-end px-4 justify-between">
         <label htmlFor="repeatEmail">Repetir Email</label>
