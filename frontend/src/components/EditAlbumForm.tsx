@@ -7,7 +7,7 @@ import SelectMap from "./SelectMap"
 import { useState, useEffect } from "react"
 import { uploadSingleImage } from "@/services/uploadImageService"
 import ImagesIcon from '/public/images/logo_images.svg'
-import { Country, PhotoFromAlbum } from "@/interfaces/album"
+import { Country, CountryWithoutDescription, PhotoFromAlbum } from "@/interfaces/album"
 import { TagsInput } from "./TagsInput"
 import ImageDescription from "./ImageInput"
 

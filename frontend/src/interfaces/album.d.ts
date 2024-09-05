@@ -1,14 +1,14 @@
 export interface Album {
   title: string
   description: string
-  location: Country
+  location: CountryWithoutDescription
   photos: PhotoFromAlbum[]
   tags: string[]
 }
 
 export interface Country {
-  /*   description: string
-   */ latitude: number
+  description: string
+  latitude: number
   longitude: number
 }
 
@@ -22,3 +22,5 @@ export interface Feature {
   place_name: string
   place_type: string[]
 }
+
+export type CountryWithoutDescription = Omit<Country, 'description'>

@@ -1,10 +1,10 @@
 'use server'
-import { Country, PhotoFromAlbum } from '@/interfaces/album'
+import { CountryWithoutDescription, PhotoFromAlbum } from '@/interfaces/album'
 import { createAlbumService } from '@/services/albumService'
 
 export async function createAlbumAction(
   albumImages: PhotoFromAlbum[],
-  markerCoordinates: Country | null,
+  markerCoordinates: CountryWithoutDescription | null,
   tags: string[],
   token: string | null,
   prevState: any,
@@ -51,7 +51,7 @@ export async function createAlbumAction(
 
 export async function updateAlbumAction(
   albumImages: PhotoFromAlbum[],
-  markerCoordinates: Country | null,
+  markerCoordinates: CountryWithoutDescription | null,
   tags: string[],
   prevState: any,
   formData: FormData
