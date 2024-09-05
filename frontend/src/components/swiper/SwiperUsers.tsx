@@ -8,6 +8,7 @@ import Image from "next/image"
 export function SwiperUsers() {
     return (
         <Swiper
+            className="my-4"
             spaceBetween={30}
             slidesPerView={4}
         >
