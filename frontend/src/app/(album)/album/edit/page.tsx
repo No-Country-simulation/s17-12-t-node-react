@@ -1,10 +1,18 @@
 import EditAlbumForm from "@/components/EditAlbumForm";
-import { Album } from "@/interfaces/album";
+import { Album, Country, PhotoFromAlbum } from "@/interfaces/album";
 import Link from "next/link";
 
 const BASE_URL = process.env.API_URL
 
-const album: Album = {
+interface AlbumForEdit {
+  title: string
+  description: string
+  location: Country
+  photos: PhotoFromAlbum[]
+  tags: string[]
+}
+
+const album: AlbumForEdit = {
   title: "Viaje",
   description: "Un gran y bonito lugar",
   location: {
