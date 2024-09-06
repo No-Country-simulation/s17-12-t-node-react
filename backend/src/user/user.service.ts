@@ -25,7 +25,7 @@ export class UserService {
 
     const hashAdapter = new HashAdapter();
     const hashedPassword = hashAdapter.createHash(createUserDto.password, 10);
-    
+
     const res = await this.userModel.create({
       ...createUserDto,
       password: hashedPassword,
@@ -46,14 +46,12 @@ export class UserService {
     }
     const user = await this.userModel.findById(id);
     if (!user) {
-      throw new NotFoundException('Task not found');
+      throw new NotFoundException(`User with id ${id} not found`);
     }
     return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    console.log(updateUserDto);
-    console.log(id);
     return await this.userModel.findByIdAndUpdate(id, updateUserDto, {
       new: true,
       runValidators: true,
