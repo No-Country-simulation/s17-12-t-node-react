@@ -11,20 +11,20 @@ export function Footer() {
             </Link>
 
             <div className="grow flex justify-center ss:justify-evenly">
-                <Link href={"/search"} className="flex flex-col items-center justify-center">
+                <Link href={'/search'} className="flex flex-col items-center justify-center">
                     <IconSearch />
                     <p>Buscar</p>
                 </Link>
 
-                <div className="flex flex-col items-center rounded-full  size-[70px] justify-center relative -top-10 bg-FondoPrimary ss:size-24">
+                <Link href={'/album/create'} className="flex flex-col items-center rounded-full  size-[70px] justify-center relative -top-10 bg-FondoPrimary ss:size-24">
                     <IconPlusCircle size={50} />
                     {/* <p className="text-[10px]">Crear album</p> */}
-                </div>
+                </Link>
 
-                <div className="flex flex-col items-center justify-center">
+                <Link href={'/perfil/test'} className="flex flex-col items-center justify-center">
                     <IconBook />
                     <p>Wish list</p>
-                </div>
+                </Link>
             </div>
 
             <Link href={"/perfil/william96"} className="flex flex-col items-center justify-center">
