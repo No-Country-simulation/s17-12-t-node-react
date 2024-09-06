@@ -6,7 +6,7 @@ import { User } from '../../user/entities/user.entity';
 import { Location, LocationSchema } from './location.schema';
 import { Photo, PhotoSchema } from './photo.schema';
 import { Like, LikeSchema } from './like.schema';
-import { CommentSchema } from './comment.schema';
+import { CommentSchema, Comment } from './comment.schema';
 
 @Schema({
   timestamps: true,
