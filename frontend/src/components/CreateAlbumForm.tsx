@@ -3,13 +3,14 @@ import Image from "next/image"
 import { useFormState } from "react-dom"
 import { SubmitButton } from "./SubmitButton"
 import SelectMap from "./SelectMap"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { uploadSingleImage } from "@/services/uploadImageService"
 import ImagesIcon from '/public/images/logo_images.svg'
 import { createAlbumAction } from "@/actions/albumActions"
 import { Country, PhotoFromAlbum } from "@/interfaces/album"
 import { TagsInput } from "./TagsInput"
 import ImageDescription from "./ImageInput"
+import { useRouter } from "next/navigation"
 
 
 const INITIAL_STATE = {
@@ -22,12 +23,16 @@ export default function CreateAlbumForm() {
   const [tags, setTags] = useState<string[]>([])
   /* const [confirmSend, setConfirmSend] = useState<boolean>(false) */
   //cambiar por una cookie
-  const token = localStorage.getItem('token')
+  let token = null
+  if (typeof window !== 'undefined') {
+    token = localStorage.getItem('token')
+  }
   const createAlbumComplete = createAlbumAction.bind(null, albumImages, markerCoordinates, tags, token)
   const [formState, formAction] = useFormState(
     createAlbumComplete,
     INITIAL_STATE
   )
+  const router = useRouter()
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files!
@@ -60,6 +65,13 @@ export default function CreateAlbumForm() {
     )
   }
 
+  useEffect(() => {
+    if (formState.success) {
+      router.push(`/feed`)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState?.success]);
+
   return (
     <form action={formAction} className="flex flex-col gap-6 mt-24 px-4">
 
@@ -79,7 +91,7 @@ export default function CreateAlbumForm() {
       <TagsInput tags={tags} setTags={setTags} />
       {formState?.errors?.tags && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.errors?.tags}</p>}
 
-      <SelectMap markerCoordinates={markerCoordinates} setMarkerCoordinates={setMarkerCoordinates} />
+      <SelectMap markerCoordinates={markerCoordinates} setMarkerCoordinates={setMarkerCoordinates} tags={tags} setTags={setTags} />
 
       <div className="flex items-end justify-between">
         <label htmlFor="description">Describe tu viaje</label>

@@ -24,3 +24,17 @@ export interface Feature {
 }
 
 export type CountryWithoutDescription = Omit<Country, 'description'>
+
+interface AlbumFromFetch {
+  title: string
+  description: string
+  location: CountryWithoutDescription
+  photos: PhotoFromAlbum[]
+  tags: string[]
+  userId: string
+  likes: []
+  comments: []
+  createdAt: string
+  updatedAt: string
+  id: string
+}

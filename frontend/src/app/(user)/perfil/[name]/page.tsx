@@ -17,6 +17,9 @@ export default async function PerfilPage({ params }: { params: { name: string } 
     const profile: User = await data.json()
     console.log(profile);
 
+    const profileImage = profile.imageUrl ? profile.imageUrl : imageUser
+    const profileName = profile.username ? profile.username : id
+
     return (
         <article >
             <div className="flex justify-between bg-[#D9D9D9] pt-10 pb-2 px-2 text-[#979797]">
@@ -34,9 +37,9 @@ export default async function PerfilPage({ params }: { params: { name: string } 
             <h2 className="font-bold text-2xl text-center">{profile.username}</h2> */}
             <div className="flex items-center ml-8 gap-3 my-6">
                 <figure className="relative size-20 rounded-full overflow-hidden">
-                    <Image src={imageUser} alt="Avatar" className="object-cover" fill />
+                    <Image src={profileImage} alt="Avatar" className="object-cover" fill />
                 </figure>
-                <h2 className="font-bold text-2xl ">{params.name}</h2>
+                <h2 className="font-bold text-2xl ">{profileName}</h2>
             </div>
             <div>
                 <ul className="flex justify-between text-2xl px-4 py-4">

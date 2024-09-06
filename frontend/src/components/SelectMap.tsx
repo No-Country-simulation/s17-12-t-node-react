@@ -1,5 +1,5 @@
 'use client'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Map, Marker } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import { Country, Feature } from '@/interfaces/album'
@@ -8,11 +8,15 @@ import countryList from '@/utils/countryList'
 type Props = {
   markerCoordinates: Country | null
   setMarkerCoordinates: (country: Country | null) => void
+  tags: string[]
+  setTags: (tag: string[]) => void
 }
 
-const SelectMap: React.FC<Props> = ({ markerCoordinates, setMarkerCoordinates }) => {
+const SelectMap: React.FC<Props> = ({ markerCoordinates, setMarkerCoordinates, tags, setTags }) => {
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null)
   const [isPlaceConfirmed, setIsPlaceConfirmed] = useState(false)
+  const [placeName, setIsPlaceName] = useState<string>('')
+  const [placeCoordinates, setPlaceCoordinates] = useState<[number, number]>([0, 0])
   const mapRef = useRef<any>(null)
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -53,9 +57,8 @@ const SelectMap: React.FC<Props> = ({ markerCoordinates, setMarkerCoordinates })
     return 'Lugar no identificado'
   }
 
-  const handleMapClick = async (event: any) => {
-    const placeName = await searchPlace(event.lngLat.lng, event.lngLat.lat);
-    console.log('Nombre del lugar:', placeName);
+  const handleMapClick = (event: any) => {
+    setPlaceCoordinates([event.lngLat.lng, event.lngLat.lat])
 
     setMarkerCoordinates({
       description: placeName,
@@ -65,9 +68,31 @@ const SelectMap: React.FC<Props> = ({ markerCoordinates, setMarkerCoordinates })
     setIsPlaceConfirmed(false)
   }
 
-  const handleConfirmPlace = () => {
-    setIsPlaceConfirmed(true)
+  const handleConfirmPlace = async () => {
+    const placeName = await searchPlace(placeCoordinates[0], placeCoordinates[1]);
+    console.log('Nombre del lugar:', placeName);
+    setIsPlaceName(() => placeName)
+    if (placeName) {
+      setIsPlaceConfirmed(true)
+    }
   }
+
+  useEffect(() => {
+    if (isPlaceConfirmed) {
+      const isPlaceNameInTags = tags.includes(placeName)
+      console.log(isPlaceNameInTags)
+      if (!isPlaceNameInTags) {
+        setTags([...tags, placeName])
+      }
+      const newMarker = {
+        description: placeName,
+        latitude: markerCoordinates?.latitude as number,
+        longitude: markerCoordinates?.longitude as number
+      }
+      setMarkerCoordinates(newMarker)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaceConfirmed]);
 
   return (
     <>

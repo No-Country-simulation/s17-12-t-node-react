@@ -4,8 +4,9 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import "swiper/css"
 import { ImagesUser } from "@/utils/ImagesUser"
 import Image from "next/image"
+import { User } from "@/interfaces/user"
 
-export function SwiperUsers() {
+export function SwiperUsers({ users }: { users: User[] }) {
     return (
         <Swiper
             className="my-4"
@@ -13,10 +14,10 @@ export function SwiperUsers() {
             slidesPerView={4}
         >
             {
-                ImagesUser.map((user, i) => (
+                users.map((user, i) => (
                     <SwiperSlide key={i} style={{ "display": "flex", "flexDirection": "column", "alignItems": "center", }}>
-                        <Image src={user.url} alt="foto" className="rounded-full object-cover size-20" />
-                        <h2 className="text-center flex-col">{user.name}</h2>
+                        <Image src={user.imageUrl} alt="foto" width={400} height={400} className="rounded-full object-cover size-20" />
+                        <h2 className="text-center flex-col">{user.username}</h2>
                     </SwiperSlide>
                 ))
             }

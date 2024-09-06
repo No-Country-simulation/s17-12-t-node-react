@@ -12,7 +12,7 @@ interface AlbumForEdit {
   tags: string[]
 }
 
-const album: AlbumForEdit = {
+const albumForEdit: AlbumForEdit = {
   title: "Viaje",
   description: "Un gran y bonito lugar",
   location: {
@@ -38,8 +38,8 @@ const album: AlbumForEdit = {
 export default async function CreateAlbum({ params }: { params: { id: string } }) {
   const id = params.id
   const url = BASE_URL + '/album/' + id
-  /* const data = await fetch(url)
-  const album: Album = await data.json() */
+  const data = await fetch(url)
+  const album: AlbumForEdit = await data.json()
 
   return (
     <div className="bg-white w-full min-h-screen text-black relative flex flex-col">
@@ -47,7 +47,7 @@ export default async function CreateAlbum({ params }: { params: { id: string } }
         <Link href={'/'} className="absolute self-center">Regresar</Link>
         <h2 className="text-base text-center">Crear Albúm</h2>
       </div>
-      <EditAlbumForm initialData={album} />
+      <EditAlbumForm initialData={album || albumForEdit} />
     </div>
   )
 }
