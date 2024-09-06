@@ -2,8 +2,10 @@ import Image from "next/image";
 import { IconBook, IconChat, IconCorazon, IconLocation, IconPaper } from "../icons";
 import { SwiperImages } from "../swiper/SwiperImages";
 import userImage from "/public/feed/user/image7.jpg"
+import { AlbumFromFetch } from "@/interfaces/album";
 
-export function CardFeed() {
+export function CardFeed({ album }: { album: AlbumFromFetch }) {
+    console.log(album);
     return (
         <div className="mt-10">
 
@@ -11,15 +13,15 @@ export function CardFeed() {
             <div className="flex justify-between px-4 text-TextPrimary">
                 <div className="flex items-center gap-2 ">
                     <Image src={userImage} alt="foto" className="size-11 rounded-full bg-gray-500" />
-                    <h2 className="font-bold">Aventura</h2>
+                    <h2 className="font-bold">{album.tags[0]}</h2>
                 </div>
                 <div className="flex items-center">
                     <IconLocation />
-                    <h2 className="font-bold">Location</h2>
+                    <h2 className="font-bold">{album.tags[album.tags.length - 1]}</h2>
                 </div>
             </div>
 
-            <SwiperImages />
+            <SwiperImages images={album.photos} />
 
             <div className="flex justify-between py-4 px-4 text-TextPrimary">
                 <div className="flex gap-4 ">
@@ -31,7 +33,7 @@ export function CardFeed() {
                 <IconBook />
             </div>
 
-            <p className="px-10">Frankis  los paisajes de Purmamarca, Jujuy, Arg. bla bla etc  ver <span className="text-red-600">mas...</span></p>
+            <p className="px-10"><strong>{album.userId}</strong> {album.description}<span className="text-blue-600 cursor-pointer">ver mas...</span></p>
 
         </div>
     )

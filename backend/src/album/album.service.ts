@@ -5,12 +5,14 @@ import { Model, Types } from 'mongoose';
 import * as sw from 'stopword';
 import { CreateAlbumDto, UpdateAlbumDto } from './dto';
 import { Album } from './schemas';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AlbumService {
   constructor(
     @InjectModel(Album.name)
     private readonly albumModel: Model<Album>,
+    private readonly userService: UserService,
   ) {}
 
   async create(userId: Types.ObjectId, createAlbumDto: CreateAlbumDto) {
@@ -48,7 +50,14 @@ export class AlbumService {
   }
 
   async findAllByUserId(userId: string) {
-    const foundAlbums = await this.albumModel.find({ userId });
+    await this.userService.findOne(userId);
+
+    const userIdToObjectId = new Types.ObjectId(userId);
+
+    const foundAlbums = await this.albumModel
+      .find({ userId: userIdToObjectId })
+      .exec();
+
     return foundAlbums;
   }
 

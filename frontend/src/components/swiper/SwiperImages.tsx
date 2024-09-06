@@ -9,8 +9,9 @@ import 'swiper/css/pagination';
 
 import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
+import { PhotoFromAlbum } from "@/interfaces/album";
 
-export function SwiperImages() {
+export function SwiperImages({ images }: { images: PhotoFromAlbum[] }) {
     return (
         <Swiper
             style={{ "--swiper-navigation-color": "#fff", " --swiper-pagination-color": "#fff", "--swiper-pagination-bullet-inactive-color": "#fff", "--swiper-pagination-bullet-inactive-opacity": ".4", } as React.CSSProperties}
@@ -21,9 +22,9 @@ export function SwiperImages() {
             slidesPerView={1}
         >
             {
-                ImagesAlbum.map((image, i) => (
+                images.map((image, i) => (
                     <SwiperSlide key={i} className="relative" >
-                        <Image src={image.url} alt="foto" className="object-cover h-full w-full" />
+                        <Image width={1400} height={1000} src={image.url} alt={image.description} className="object-cover h-full w-full" />
                     </SwiperSlide>
                 ))
             }

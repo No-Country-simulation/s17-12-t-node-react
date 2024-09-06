@@ -1,3 +1,5 @@
+import { LoginUser } from '@/interfaces/user'
+
 interface RegisterUserProps {
   password: string
   email: string
@@ -12,14 +14,33 @@ export async function registerUserService(userData: RegisterUserProps) {
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ ...userData }),
-      cache: 'no-cache'
+      cache: 'no-cache',
     })
 
     return response.json()
   } catch (error) {
     console.error('Registration Service Error:', error)
+  }
+}
+
+export async function loginUserService(userData: LoginUser) {
+  const url = BASE_URL + '/auth/credentials'
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ...userData }),
+      cache: 'no-cache',
+    })
+
+    return response.json()
+  } catch (error) {
+    console.error('Login Service Error:', error)
   }
 }
