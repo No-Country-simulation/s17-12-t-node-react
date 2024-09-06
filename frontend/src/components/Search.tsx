@@ -23,7 +23,6 @@ export default function Search({ placeholder }: { placeholder: string }) {
     } else {
       params.delete('q')
     }
-    console.log(term)
     replace(`${pathname}?${params.toString()}`)
   }
 
@@ -37,6 +36,8 @@ export default function Search({ placeholder }: { placeholder: string }) {
       <input
         className="block w-full rounded-2xl border border-gray-400 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
         placeholder={placeholder}
+        name='search'
+        id='search'
         onChange={(e) => {
           debouncedFunction(e.target.value)
         }}

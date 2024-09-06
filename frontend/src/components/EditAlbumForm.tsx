@@ -20,14 +20,15 @@ interface EditAlbumFormProps {
     tags: string[]
     description: string
     photos: PhotoFromAlbum[]
-    location: Country
+    location: Country,
+    title: string,
   }
 }
 
 export default function EditAlbumForm({ initialData }: EditAlbumFormProps) {
   const [markerCoordinates, setMarkerCoordinates] = useState<Country | null>(initialData.location)
   const [albumImages, setAlbumImages] = useState<PhotoFromAlbum[]>(initialData.photos)
-  const [tags, setTags] = useState<string[]>([])
+  const [tags, setTags] = useState<string[]>(initialData.tags)
   const updateAlbumComplete = updateAlbumAction.bind(null, albumImages, markerCoordinates, tags)
   const [formState, formAction] = useFormState(
     updateAlbumComplete,
@@ -74,6 +75,7 @@ export default function EditAlbumForm({ initialData }: EditAlbumFormProps) {
           type="string"
           id="title"
           name="title"
+          defaultValue={initialData.title}
           required
         />
 
@@ -84,7 +86,7 @@ export default function EditAlbumForm({ initialData }: EditAlbumFormProps) {
       <TagsInput tags={tags} setTags={setTags} />
       {formState?.errors?.tags && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.errors?.tags}</p>}
 
-      <SelectMap markerCoordinates={markerCoordinates} setMarkerCoordinates={setMarkerCoordinates} />
+      <SelectMap markerCoordinates={markerCoordinates} setMarkerCoordinates={setMarkerCoordinates} tags={tags} setTags={setTags} />
 
       <div className="flex items-end justify-between">
         <label htmlFor="description">Describe tu viaje</label>
