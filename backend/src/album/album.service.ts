@@ -70,7 +70,18 @@ export class AlbumService {
     return foundAlbums;
   }
 
-  async addComment(id: string, userId: string, comment: string) {
-    this.findOneById(id);
+  async findOneByCommentId(commentId: Types.ObjectId) {
+    const albumFound = await this.albumModel.findOne({
+      comments: {
+        $elemMatch: { _id: commentId },
+      },
+    });
+
+    if (!albumFound)
+      throw new NotFoundException(
+        `Album with comment id ${commentId} not found`,
+      );
+
+    return albumFound;
   }
 }
