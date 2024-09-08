@@ -1,7 +1,7 @@
 import { Controller, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 
 import { CommentService } from './comment.service';
-import { CreateCommentDto, UpdateCommentDto } from './dto';
+import { CreateCommentDto, DeleteCommentDto, UpdateCommentDto } from './dto';
 import { Auth, GetUser } from '../auth/decorators';
 import { User } from '../user/entities/user.entity';
 import { Types } from 'mongoose';
@@ -13,7 +13,7 @@ type UserTemporalType = User & { _id: Types.ObjectId };
 
 @Controller('comment')
 export class CommentController {
-  constructor(private readonly commentService: CommentService) { }
+  constructor(private readonly commentService: CommentService) {}
 
   @ApiBearerAuth()
   @Auth()
@@ -25,16 +25,29 @@ export class CommentController {
     return await this.commentService.create(user._id, createCommentDto);
   }
 
+  @ApiBearerAuth()
+  @Auth()
   @Patch(':id')
   async update(
+    @GetUser() user: UserTemporalType,
     @Param('id', ObjectIdValidationPipe) id: Types.ObjectId,
     @Body() updateCommentDto: UpdateCommentDto,
   ) {
-    return await this.commentService.update(id, updateCommentDto);
+    return await this.commentService.update(user._id, id, updateCommentDto);
   }
 
+  @ApiBearerAuth()
+  @Auth()
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.commentService.remove(+id);
+  async delete(
+    @GetUser() user: UserTemporalType,
+    @Param('id', ObjectIdValidationPipe) commentId: Types.ObjectId,
+    @Body() deleteCommentDto: DeleteCommentDto,
+  ) {
+    return await this.commentService.delete(
+      user._id,
+      commentId,
+      deleteCommentDto.albumId,
+    );
   }
 }
