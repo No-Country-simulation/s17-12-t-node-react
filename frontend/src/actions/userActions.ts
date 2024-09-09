@@ -102,3 +102,16 @@ export async function updateUserAction(
     throw error
   }
 }
+
+
+export const getUser = async () => {
+
+  const users = await fetch("https://ohmytrip-backend-production.up.railway.app/api/v1/user")
+    .then(res => res.json())
+
+  if (users) {
+    return users[0]
+  }
+
+  return { message: "No se pudo obtener los usuarios" }
+}

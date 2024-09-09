@@ -1,10 +1,9 @@
 "use client"
 
 import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
-import { ImagesUser } from "@/utils/ImagesUser"
-import Image from "next/image"
 import { User } from "@/interfaces/user"
+import Image from "next/image"
+import "swiper/css"
 
 export function SwiperUsers({ users }: { users: User[] }) {
     return (

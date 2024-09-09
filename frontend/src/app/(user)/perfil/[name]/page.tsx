@@ -6,6 +6,8 @@ import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { User } from "@/interfaces/user";
+import profileImage from "/public/feed/paisaje.jpg"
+import { getUser } from "@/actions/userActions";
 
 const BASE_URL = process.env.API_URL
 
@@ -16,6 +18,8 @@ export default async function PerfilPage({ params }: { params: { name: string } 
     const data = await fetch(url)
     const profile: User = await data.json()
     console.log(profile);
+
+    // const user: User = await getUser()
 
     const profileImage = profile.imageUrl ? profile.imageUrl : imageUser
     const profileName = profile.username ? profile.username : id

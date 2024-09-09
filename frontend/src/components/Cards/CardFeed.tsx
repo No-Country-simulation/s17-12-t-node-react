@@ -5,19 +5,19 @@ import userImage from "/public/feed/user/image7.jpg"
 import { AlbumFromFetch } from "@/interfaces/album";
 
 export function CardFeed({ album }: { album: AlbumFromFetch }) {
-    console.log(album);
+    // console.log(album);
     return (
         <div className="mt-10">
 
             {/* AVATAR Y LOCATION  */}
-            <div className="flex justify-between px-4 text-TextPrimary">
+            <div className="grid grid-cols-2 px-4 text-TextPrimary">
                 <div className="flex items-center gap-2 ">
                     <Image src={userImage} alt="foto" className="size-11 rounded-full bg-gray-500" />
                     <h2 className="font-bold">{album.tags[0]}</h2>
                 </div>
                 <div className="flex items-center">
                     <IconLocation />
-                    <h2 className="font-bold">{album.tags[album.tags.length - 1]}</h2>
+                    <h2 className="font-bold truncate">{album.tags[album.tags.length - 1]}</h2>
                 </div>
             </div>
 
