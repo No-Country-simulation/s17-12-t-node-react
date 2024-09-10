@@ -11,6 +11,8 @@ import { Country, PhotoFromAlbum } from "@/interfaces/album"
 import { TagsInput } from "./TagsInput"
 import ImageDescription from "./ImageInput"
 import { useRouter } from "next/navigation"
+import LexicalEditor from "./LexicalEditor"
+import { EditorState } from "lexical"
 
 
 const INITIAL_STATE = {
@@ -21,13 +23,15 @@ export default function CreateAlbumForm() {
   const [markerCoordinates, setMarkerCoordinates] = useState<Country | null>(null)
   const [albumImages, setAlbumImages] = useState<PhotoFromAlbum[]>([])
   const [tags, setTags] = useState<string[]>([])
+  const [description, setDescription] = useState<string>("");
+
   /* const [confirmSend, setConfirmSend] = useState<boolean>(false) */
   //cambiar por una cookie
   let token = null
   if (typeof window !== 'undefined') {
     token = localStorage.getItem('token')
   }
-  const createAlbumComplete = createAlbumAction.bind(null, albumImages, markerCoordinates, tags, token)
+  const createAlbumComplete = createAlbumAction.bind(null, albumImages, markerCoordinates, tags, token, description)
   const [formState, formAction] = useFormState(
     createAlbumComplete,
     INITIAL_STATE
@@ -65,9 +69,15 @@ export default function CreateAlbumForm() {
     )
   }
 
+  //asi es como se manejaria la descripcion del json para poder renderizarla y verla como se edito
+  const handleEditorChange = (editorState: EditorState) => {
+    const json = editorState.toJSON()
+    setDescription(JSON.stringify(json))
+  }
+
   useEffect(() => {
     if (formState.success) {
-      router.push(`/feed`)
+      /* router.push(`/feed`) */
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState?.success]);
@@ -94,21 +104,14 @@ export default function CreateAlbumForm() {
       <SelectMap markerCoordinates={markerCoordinates} setMarkerCoordinates={setMarkerCoordinates} tags={tags} setTags={setTags} />
 
       <div className="flex items-end justify-between">
-        <label htmlFor="description">Describe tu viaje</label>
-        <input
-          className="border-b border-gray-400 focus-visible:outline-none"
-          type="text"
-          id="description"
-          name="description"
-          required
-        />
+        <LexicalEditor onChange={handleEditorChange} />
       </div>
       {formState?.errors?.description && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.errors?.description}</p>}
 
       <div className="w-full flex justify-center">
         <label htmlFor="doc" className="relative flex flex-col items-center p-4 w-[296px] h-24 rounded-3xl border border-gray-400 border-dashed bg-gray-100 cursor-pointer">
-          <Image className="h-9 w-auto" width={360} height={360} src={ImagesIcon} alt="image icon" />
-          <h4 className="text-xl font-medium text-gray-700">Subir Imágenes</h4>
+          <Image className="h-9 w-auto cursor-pointer" width={360} height={360} src={ImagesIcon} alt="image icon" />
+          <h4 className="text-xl font-medium text-gray-700 cursor-pointer">Subir Imágenes</h4>
           <input
             type='file'
             name='albumImages'
@@ -175,7 +178,7 @@ export default function CreateAlbumForm() {
         </div>
       )} */}
 
-      <SubmitButton className="text-xl bg-slate-400 rounded h-12 mx-4 mb-4 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Guardar" />
+      <SubmitButton className="text-xl rounded h-12 mx-4 mb-4 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Guardar" />
       {formState?.createAlbumError && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.message}: {formState?.createAlbumError}</p>}
       {formState?.success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{formState?.success}</p>}
     </form>

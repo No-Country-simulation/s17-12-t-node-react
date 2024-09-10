@@ -7,12 +7,11 @@ export async function createAlbumAction(
   markerCoordinates: CountryWithoutDescription | null,
   tags: string[],
   token: string | null,
+  description: string,
   prevState: any,
   formData: FormData
 ) {
   const title = formData.get('title') as string
-  const description = formData.get('description') as string
-  console.log(token)
   const fields = {
     title: title,
     description: description,
