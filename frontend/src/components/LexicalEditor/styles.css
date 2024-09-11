@@ -288,7 +288,7 @@ pre::-webkit-scrollbar-thumb {
   display: flex;
   background: none;
   border-radius: 10px;
-  padding: 8px;
+  padding: 8px 6px;
   cursor: pointer;
   vertical-align: middle;
 }
@@ -398,9 +398,60 @@ i.justify-align {
   background-image: url(/icons/justify.svg);
 }
 
+i.font {
+  background-image: url(/icons/text-icon.svg);
+}
+
 .read-only .editor-input {
   border: none;
   background-color: transparent;
   color: #333;
   cursor: default;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  padding: 4px;
+  border-radius: 10px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.item {
+  padding: 8px;
+  color: #050505;
+  cursor: pointer;
+  line-height: 16px;
+  font-size: 15px;
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-shrink: 0;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 0;
+  width: 100%;
+  max-width: 250px;
+  min-width: 100px;
+}
+
+.item:hover {
+  background-color: #f1f1f1;
+}
+
+.active {
+  font-weight: bold;
 }
