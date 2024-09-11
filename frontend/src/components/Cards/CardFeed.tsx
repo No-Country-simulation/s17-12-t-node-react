@@ -21,8 +21,10 @@ export function CardFeed({ album }: { album: AlbumFromFetch }) {
                 </div>
             </div>
 
+            {/* IMÁGENES  */}
             <SwiperImages images={album.photos} />
 
+            {/* DESCRIPCIÓN  */}
             <div className="flex justify-between py-4 px-4 text-TextPrimary">
                 <div className="flex gap-4 ">
                     <IconCorazon />

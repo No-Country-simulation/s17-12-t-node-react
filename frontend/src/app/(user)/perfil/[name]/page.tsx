@@ -55,6 +55,7 @@ export default async function PerfilPage({ params }: { params: { name: string } 
                     </li>
                 </ul>
 
+                {/* ALBUM  */}
                 <div className="grid grid-cols-3 gap-2 px-3 ">
                     {
                         ImagesAlbum.map((ima, i) => (
@@ -65,7 +66,7 @@ export default async function PerfilPage({ params }: { params: { name: string } 
                             [&:nth-last-child(1)]:rounded-br-2xl
                             [&:nth-child(6)]:col-span-2 
                             ">
-                                <Image src={ima.url} alt="" fill className="object-cover" />
+                                <Image src={ima.url} alt="paisaje" fill priority className="object-cover" />
                             </div>
                         ))
                     }
