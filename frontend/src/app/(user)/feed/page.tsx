@@ -18,7 +18,7 @@ export default async function FeedPage() {
     // const users = await getUser()
 
     return (
-        <div className="py-8 px-2">
+        <div className="py-8 px-2 ">
             <SwiperUsers users={userResults} />
 
             {/* Card  */}
