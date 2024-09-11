@@ -77,7 +77,7 @@ export default function CreateAlbumForm() {
 
   useEffect(() => {
     if (formState.success) {
-      /* router.push(`/feed`) */
+      router.push(`/feed`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState?.success]);
