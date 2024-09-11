@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { InitialUser, User, UserWithoutId } from '@/interfaces/user'
 import { patchUserService, updateUserService } from '@/services/userServices'
 import { redirect } from 'next/navigation'
+const BASE_URL = process.env.API_URL
 
 const schemaUser = z
   .object({
@@ -103,15 +104,26 @@ export async function updateUserAction(
   }
 }
 
-
 export const getUser = async () => {
-
-  const users = await fetch("https://ohmytrip-backend-production.up.railway.app/api/v1/user")
-    .then(res => res.json())
+  const users = await fetch(
+    'https://ohmytrip-backend-production.up.railway.app/api/v1/user'
+  ).then((res) => res.json())
 
   if (users) {
     return users[0]
   }
 
-  return { message: "No se pudo obtener los usuarios" }
+  return { message: 'No se pudo obtener los usuarios' }
+}
+
+export async function getUserById(id: string) {
+  const url = BASE_URL + '/user/' + id
+  const data = await fetch(url)
+  const result: User = await data.json()
+
+  if (result) {
+    return result
+  }
+
+  return null
 }
