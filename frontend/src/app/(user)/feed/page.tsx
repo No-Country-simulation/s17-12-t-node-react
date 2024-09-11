@@ -1,4 +1,5 @@
-import { BackArrow, CardFeed, SwiperUsers } from "@/components";
+import { getUser } from "@/actions/userActions";
+import { CardFeed, SwiperUsers } from "@/components";
 import { AlbumFromFetch } from "@/interfaces/album";
 import { User } from "@/interfaces/user";
 
@@ -14,8 +15,10 @@ export default async function FeedPage() {
     const userData = await fetch(userUrl)
     const userResults: User[] = await userData.json()
 
+    // const users = await getUser()
+
     return (
-        <div className="py-8 px-2">
+        <div className="py-8 px-2 ">
             <SwiperUsers users={userResults} />
 
             {/* Card  */}
