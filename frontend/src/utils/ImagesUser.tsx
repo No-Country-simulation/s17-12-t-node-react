@@ -12,6 +12,6 @@ import user4 from "/public/feed/user/image4.jpg"
 import user5 from "/public/feed/user/image5.jpg"
 import user6 from "/public/feed/user/image6.jpg"
 
-export const ImagesAlbum = [{ url: image1 }, { url: image2 }, { url: image3 }, { url: image4 }, { url: image5 }, { url: image6 }]
+export const ImagesAlbum = [{ url: image1 }, { url: image2 }, { url: image3 }, { url: image4 }, { url: image5 },]
 
 export const ImagesUser = [{ url: user1, name: "user 1" }, { url: user2, name: "user 2" }, { url: user3, name: "user 3" }, { url: user4, name: "user 4" }, { url: user5, name: "user 5" }, { url: user6, name: "user 6" },]

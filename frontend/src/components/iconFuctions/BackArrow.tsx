@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation";
-import { IconFlechaAtras } from "./icons";
+import { IconFlechaAtras } from "../icons";
 
 export function BackArrow() {
 

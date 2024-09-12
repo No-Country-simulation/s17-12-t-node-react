@@ -23,7 +23,7 @@ export function Footer() {
 
                 <Link href={'/perfil/test'} className="flex flex-col items-center justify-center">
                     <IconBook />
-                    <p>Wish list</p>
+                    <p>A visitar</p>
                 </Link>
             </div>
 
