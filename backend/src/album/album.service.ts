@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Model, Types } from 'mongoose';
@@ -93,4 +97,46 @@ export class AlbumService {
 
     return albumFound;
   }
+
+  async like(userId: Types.ObjectId, id: string) {
+    const albumFound = await this.albumModel.findById(id);
+    if (!albumFound) {
+      throw new NotFoundException(`Album with id ${id} not found`);
+    }
+
+    if (albumFound.likes.includes(userId)) {
+      throw new ConflictException(`User ${userId} already likes this album`);
+    }
+    albumFound.likes.push(userId);
+    await albumFound.save();
+    return albumFound;
+  }
+
+  async dislike(userId: Types.ObjectId, id: string) {
+    const albumFound = await this.albumModel.findById(id);
+    if (!albumFound) {
+      throw new NotFoundException(`Album with id ${id} not found`);
+    }
+
+    if (albumFound.likes.includes(userId)) {
+      albumFound.likes = albumFound.likes.filter((like) => like !== userId);
+      await albumFound.save();
+      return albumFound;
+    }
+  }
+
+  /*
+ const updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        { $pull: { userIdsWhoLiked: userId } },
+        { new: true }
+      );
+
+   if (post.userIdsWhoLiked.includes(userId)) {
+        console.log(`post already liked`);
+        return res
+          .status(400)
+          .json({ message: "You have already liked this post" });
+      }
+   */
 }

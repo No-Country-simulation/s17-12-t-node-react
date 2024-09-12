@@ -5,7 +5,7 @@ import { Types } from 'mongoose';
 import { User } from '../../user/entities/user.entity';
 import { Location, LocationSchema } from './location.schema';
 import { Photo, PhotoSchema } from './photo.schema';
-import { Like, LikeSchema } from './like.schema';
+import { LikeSchema } from './like.schema';
 import { CommentSchema, Comment } from './comment.schema';
 
 @Schema({
@@ -38,7 +38,7 @@ export class Album {
   userId: Types.ObjectId;
 
   @Prop({ type: [LikeSchema] })
-  likes?: Like[];
+  likes?: Types.ObjectId[];
 
   @Prop({ type: [CommentSchema] })
   comments?: Comment[];
