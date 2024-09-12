@@ -7,7 +7,7 @@ import { loginUserAction } from "@/actions/authActions"
 import { useFormState } from "react-dom"
 import { SubmitButton } from "./SubmitButton"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 
 const INITIAL_STATE = {
   data: null,
@@ -23,6 +23,7 @@ export default function LoginForm() {
   useEffect(() => {
     if (formState.token) {
       localStorage.setItem("token", formState.token)
+      localStorage.setItem("userId", formState.id)
 
       if (formState.id) {
         router.push(`/perfil/${formState.id}`)
