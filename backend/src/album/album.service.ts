@@ -93,4 +93,9 @@ export class AlbumService {
 
     return albumFound;
   }
+
+  async findAllAlbums() {
+    const foundAllAlbums = await this.albumModel.find();
+    return foundAllAlbums;
+  }
 }

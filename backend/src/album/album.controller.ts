@@ -43,6 +43,13 @@ export class AlbumController {
   }
 
   @ApiBearerAuth()
+  @Get('all')
+  @Auth()
+  async allAlbums() {
+    return await this.albumService.findAllAlbums();
+  }
+
+  @ApiBearerAuth()
   @Post()
   @Auth()
   async create(

@@ -6,6 +6,8 @@ import LinkedinIcon from '/public/images/logos_linkedin.svg'
 import { registerUserAction } from "@/actions/authActions"
 import { useFormState } from "react-dom"
 import { SubmitButton } from "./SubmitButton"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 const INITIAL_STATE = {
   data: null,
@@ -16,6 +18,20 @@ export default function RegisterForm() {
     registerUserAction,
     INITIAL_STATE
   )
+
+  const router = useRouter()
+
+  useEffect(() => {
+    if (formState.token) {
+      localStorage.setItem("token", formState.token)
+      localStorage.setItem("userId", formState.id)
+
+      if (formState.id) {
+        router.push(`/preferences/${formState.id}`)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formState.token])
 
   return (
     <form action={formAction} className="flex flex-col gap-6">
