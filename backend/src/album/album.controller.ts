@@ -75,19 +75,12 @@ export class AlbumController {
   }
 
   @ApiBearerAuth()
-  @Post(':id')
+  @Post('like/:id')
   @Auth()
-  async like(
+  async likeDislike(
     @GetUser() user: UserTemporalType,
     @Param('id', ObjectIdValidationPipe) albumId: string,
   ) {
-    return await this.albumService.like(user._id, albumId);
-  }
-
-  async dislike(
-    @GetUser() user: UserTemporalType,
-    @Param('id', ObjectIdValidationPipe) albumId: string,
-  ) {
-    return await this.albumService.dislike(user._id, albumId);
+    return await this.albumService.likeDislike(user._id, albumId);
   }
 }
