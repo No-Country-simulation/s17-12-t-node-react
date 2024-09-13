@@ -10,15 +10,22 @@
     "deploy": "vercel deploy --prod --token=$VERCEL_TOKEN"
   },
   "dependencies": {
+    "@lexical/html": "^0.17.1",
+    "@lexical/link": "^0.17.1",
+    "@lexical/list": "^0.17.1",
+    "@lexical/react": "^0.17.1",
+    "@lexical/rich-text": "^0.17.1",
+    "lexical": "^0.17.1",
+    "clsx": "^2.1.1",
+    "mapbox-gl": "^3.6.0",
     "next": "14.2.6",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.3.0",
-    "sharp": "^0.33.5",
-    "zod": "^3.23.8",
-    "mapbox-gl": "^3.6.0",
     "react-map-gl": "^7.1.7",
-    "swiper": "^11.1.12"
+    "sharp": "^0.33.5",
+    "swiper": "^11.1.12",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/mapbox-gl": "^3.4.0",

@@ -32,6 +32,11 @@ export class AlbumController {
     return await this.albumService.searchAlbums(query);
   }
 
+  @Get('all')
+  async allAlbums() {
+    return await this.albumService.findAllAlbums();
+  }
+
   @Get(':id')
   async findOne(@Param('id', ObjectIdValidationPipe) id: string) {
     return await this.albumService.findOneById(id);

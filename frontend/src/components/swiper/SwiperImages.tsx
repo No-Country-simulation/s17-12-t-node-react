@@ -14,7 +14,7 @@ import { PhotoFromAlbum } from "@/interfaces/album";
 export function SwiperImages({ images }: { images: PhotoFromAlbum[] }) {
     return (
         <Swiper
-            style={{ "--swiper-navigation-color": "#fff", " --swiper-pagination-color": "#fff", "--swiper-pagination-bullet-inactive-color": "#fff", "--swiper-pagination-bullet-inactive-opacity": ".4", } as React.CSSProperties}
+            style={{ "--swiper-navigation-color": "#fff", "--swiper-pagination-color": "#fff", "--swiper-pagination-bullet-inactive-color": "#fff", "--swiper-pagination-bullet-inactive-opacity": ".4", } as React.CSSProperties}
             modules={[Pagination, Navigation]}
             pagination={{ clickable: true }}
             navigation={{}}

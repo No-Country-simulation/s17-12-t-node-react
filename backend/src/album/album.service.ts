@@ -98,6 +98,11 @@ export class AlbumService {
     return albumFound;
   }
 
+  async findAllAlbums() {
+    const foundAllAlbums = await this.albumModel.find();
+    return foundAllAlbums;
+  }
+
   async like(userId: Types.ObjectId, id: string) {
     const albumFound = await this.albumModel.findById(id);
     if (!albumFound) {
