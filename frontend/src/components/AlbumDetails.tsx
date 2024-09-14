@@ -30,8 +30,7 @@ const testComments = [
 
 
 export default function AlbumDetails({ album, relatedAlbums, user }: { album: AlbumFromFetch, relatedAlbums: AlbumFromFetch[], user: User | null }) {
-/*   const filteredRelated = relatedAlbums.filter((item) => item.id !== album.id)
- */  const filteredRelated = relatedAlbums
+  const filteredRelated = relatedAlbums.filter((item) => item.id !== album.id)
 
   return (
     <div className="p-4 flex flex-col gap-8">
@@ -58,7 +57,7 @@ export default function AlbumDetails({ album, relatedAlbums, user }: { album: Al
           </div>
         </div>
 
-        <Link href={'/perfil/' + user?._id} className="flex w-full h-12 items-center gap-2 mb-2">
+        <Link href={'/perfil/' + user?._id} className="flex w-max h-12 items-center gap-2 mb-2">
           <Image src={user ? user.imageUrl : ''} alt={user?.username + 'profile picture'} width={200} height={200} className="object-cover w-12 h-12 rounded-full" />
           <span className="font-medium">Publicacion por: {user?.username}</span>
         </Link>
@@ -68,7 +67,7 @@ export default function AlbumDetails({ album, relatedAlbums, user }: { album: Al
         <ReadOnlyEditor feed={false} savedContent={album.description} />
 
       ) : (
-        <ReadOnlyEditor feed={false} savedContent={album.description} />
+        <ReadOnlyEditor feed={false} savedContent={testdescription} />
       )}
 
       <div className='relative w-full overflow-hidden rounded-xl'>

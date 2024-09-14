@@ -49,6 +49,7 @@ const PreferencesForm: React.FC<UserProps> = ({ user }) => {
   const [tags, setTags] = useState<Array<string>>([])
   const router = useRouter()
   const [error, setError] = useState<string>("")
+  const [success, setSuccess] = useState<string>("")
 
   const handleSelect = (name: string) => {
     setTags((prevTags) =>
@@ -63,6 +64,7 @@ const PreferencesForm: React.FC<UserProps> = ({ user }) => {
     try {
       const responseData = await setUserTags(user, tags)
       if (responseData && responseData.tags.length > 0) {
+        setSuccess('Preferencias cargadas correctamente, será redirigido en breve')
         router.push('/perfil/' + user._id)
       }
     } catch (error: any) {
@@ -94,6 +96,8 @@ const PreferencesForm: React.FC<UserProps> = ({ user }) => {
       </div>
       <SubmitButton className="text-xl bg-slate-400 rounded h-12 mb-8 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Ingresá" />
       {error && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{error}</p>}
+      {success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{success}</p>}
+
     </form>
   )
 }

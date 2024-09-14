@@ -1,7 +1,6 @@
 'use server'
 import { LoginUser, RegisterUser } from '@/interfaces/user'
 import { loginUserService, registerUserService } from '@/services/authServices'
-import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const schemaRegister = z
@@ -54,7 +53,13 @@ export async function registerUserAction(prevState: any, formData: FormData) {
     isAdmin: false,
   }
 
+  const loginBody: LoginUser = {
+    email: emailFromForm,
+    password: passwordFromForm,
+  }
+
   const responseData = await registerUserService(body)
+  const loginData = await loginUserService(loginBody)
 
   if (!responseData) {
     return {
@@ -74,7 +79,13 @@ export async function registerUserAction(prevState: any, formData: FormData) {
     }
   }
 
-  redirect('/preferences/' + responseData._id)
+  const { token, id } = loginData
+  return {
+    ...prevState,
+    token: token,
+    id: id,
+    success: 'regsitro exitoso',
+  }
 }
 
 export async function loginUserAction(prevState: any, formData: FormData) {
