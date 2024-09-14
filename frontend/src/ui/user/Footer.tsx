@@ -50,14 +50,40 @@ const AUTH_ROUTES = [
 ]
 
 export function Footer() {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [userId, setUserId] = useState<string | null>('')
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        setIsAuthenticated(!!token)
+        const id = localStorage.getItem('userId')
+        setUserId(id)
+    }, [])
+
+    const handleLogout = () => {
+        localStorage.removeItem('token')
+        localStorage.removeItem('userId')
+        setIsAuthenticated(false)
+        setUserId(null)
+    }
+
+    const routes = isAuthenticated ? AUTH_ROUTES : DEFAULT_ROUTES
+
+    const createAlbumIconStyles = 'flex flex-col items-center rounded-full  size-[70px] justify-center relative -top-10 bg-FondoPrimary ss:size-24'
+    const perfilUrl = '/perfil/' + userId
+
     return (
         <footer className='bg-FondoPrimary sticky bottom-0 left-0 right-0 text-white rounded-t-2xl py-2 px-2 mt-16 flex justify-between sm:px-6 z-10'>
-            {routes.map((route) => (
-                <Link key={route.url} href={route.url === '/perfil' ? perfilUrl : route.url} className={`flex flex-col items-center justify-center ${route.url === '/album/create' ? createAlbumIconStyles : ''}`}>
-                    {route.icon}
-                    <p>{route.label}</p>
-                </Link>
-
+            {
+                routes.map((route) => (
+                    <Link key={route.url} href={route.url === '/perfil' ? perfilUrl : route.url} className={`flex flex-col items-center justify-center ${route.url === '/album/create' ? createAlbumIconStyles : ''}`} >
+                        {route.icon}
+                        <p>{route.label}</p>
+                    </Link>
+                ))
+            }
+            <div>
                 <Link href={'/album/create'} className="flex flex-col items-center rounded-full  size-[70px] justify-center relative -top-10 bg-FondoPrimary ss:size-24">
                     <IconPlusCircle size={50} />
                     {/* <p className="text-[10px]">Crear album</p> */}
@@ -65,15 +91,23 @@ export function Footer() {
 
                 <Link href={'/perfil/test'} className="flex flex-col items-center justify-center">
                     <IconBook />
-                    <p>Wish list</p>
+                    <p>A visitar</p>
                 </Link>
             </div>
 
-            <Link href={"/perfil/william96"} className="flex flex-col items-center justify-center">
+            <Link href={"/perfil/66e1fca2088ce50d7e07a626"} className="flex flex-col items-center justify-center">
                 <IconUser />
                 <p>Perfil</p>
             </Link>
 
+            {
+                isAuthenticated && (
+                    <button type='button' onClick={handleLogout} className='text-white flex flex-col items-center justify-center'>
+                        <IconUser />
+                        <p>Logout</p>
+                    </button>
+                )
+            }
         </footer >
     )
 }
