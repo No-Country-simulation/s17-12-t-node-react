@@ -22,7 +22,7 @@ export const IconImage = ({ className, size = 30 }: IconProps) => {
 export const IconUser = ({ className, size = 30 }: IconProps) => {
     return <FaUser size={size} className={className} />
 }
-export const IconPlusCircle = ({ className, size = 30 }: IconProps) => {
+export const IconPlusCircle = ({ className, size = 60 }: IconProps) => {
     return <LuPlusCircle size={size} className={className} />
 }
 export const IconBook = ({ className, size = 30 }: IconProps) => {

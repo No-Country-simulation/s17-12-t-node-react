@@ -40,7 +40,7 @@ const AUTH_ROUTES = [
     {
         url: '/album/create',
         icon: <IconPlusCircle />,
-        label: 'Crear álbum',
+        label: '',
     },
     {
         url: '/perfil',
@@ -69,11 +69,11 @@ export function Footer() {
 
     const routes = isAuthenticated ? AUTH_ROUTES : DEFAULT_ROUTES
 
-    const createAlbumIconStyles = 'flex flex-col items-center rounded-full  size-[70px] justify-center relative -top-10 bg-FondoPrimary ss:size-24'
+    const createAlbumIconStyles = 'flex flex-col items-center rounded-full size-24 justify-center relative -top-10 bg-FondoPrimary ss:size-24'
     const perfilUrl = '/perfil/' + userId
 
     return (
-        <footer className='bg-FondoPrimary sticky bottom-0 left-0 right-0 text-white rounded-t-2xl py-2 px-2 mt-16 flex justify-between sm:px-6 z-10'>
+        <footer className='bg-FondoPrimary sticky bottom-0 left-0 right-0 size text-white rounded-t-2xl py-2 px-2 mt-16 flex justify-between sm:px-6 z-10'>
             {routes.map((route) => (
                 <Link key={route.url} href={route.url === '/perfil' ? perfilUrl : route.url} className={`flex flex-col items-center justify-center ${route.url === '/album/create' ? createAlbumIconStyles : ''}`}>
                     {route.icon}
