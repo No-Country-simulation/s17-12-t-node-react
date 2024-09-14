@@ -9,13 +9,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       screens: {
         ss: "420px"
+      },
+      colors: {
+        // fondos
+        "FondoPrimary": "#868F7A",
+
+        // textos
+        "TextPrimary": "#6C7263"
+      },
+      dropShadow: {
+        "button": "0 4px 3px #999",
+      },
+      boxShadow: {
+        "sombra": "1px 6px 10px -5px #000"
       }
     },
   },

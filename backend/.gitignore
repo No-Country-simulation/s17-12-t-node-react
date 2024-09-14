@@ -2,6 +2,12 @@
 /dist
 /node_modules
 /build
+/mongo-data
+
+# Customs
+.http
+compose.yml
+pnpm-lock.yaml
 
 # Logs
 logs

@@ -8,6 +8,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from './entities/user.entity';
+import { HashAdapter } from 'src/common/adapters/hash.adapter';
 
 @Injectable()
 export class UserService {
@@ -21,8 +22,13 @@ export class UserService {
       const username = emailString.split('@')[0];
       return username;
     }
+
+    const hashAdapter = new HashAdapter();
+    const hashedPassword = hashAdapter.createHash(createUserDto.password, 10);
+
     const res = await this.userModel.create({
       ...createUserDto,
+      password: hashedPassword,
       username: extractUsername(createUserDto.email),
     });
     return res;
@@ -40,14 +46,12 @@ export class UserService {
     }
     const user = await this.userModel.findById(id);
     if (!user) {
-      throw new NotFoundException('Task not found');
+      throw new NotFoundException(`User with id ${id} not found`);
     }
     return user;
   }
 
   async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    console.log(updateUserDto);
-    console.log(id);
     return await this.userModel.findByIdAndUpdate(id, updateUserDto, {
       new: true,
       runValidators: true,
@@ -57,5 +61,14 @@ export class UserService {
   async remove(id: string): Promise<User> {
     const res = await this.userModel.findByIdAndDelete(id);
     return res;
+  }
+
+  async findOneByEmail(email: string) {
+    const userFound = await this.userModel.findOne({ email });
+
+    if (!userFound)
+      throw new NotFoundException(`User with email ${email} not exists`);
+
+    return userFound;
   }
 }

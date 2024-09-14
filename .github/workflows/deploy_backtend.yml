@@ -1,0 +1,32 @@
+name: Deploy Backend
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - "backend/**"
+      - ".github/workflows/deploy-backend.yml"
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Install Dependencies
+        run: |
+          rm package-lock.json
+          npm install
+
+      # Pasos para el deploy en Railway
+      - name: Install Railway
+        run: npm i -g @railway/cli
+
+      - name: Deploy
+        run: npm run deploy -w backend
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
