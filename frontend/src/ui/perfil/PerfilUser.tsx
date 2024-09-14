@@ -63,7 +63,7 @@ export default async function PerfilUser() {
                             : "grid-cols-10"
                 )}>
                     {
-                        ImagesAlbum.map((ima, i) => (
+                        ImagesAlbum.map((ima: any, i: number) => (
                             <div key={i} className={clsx(`min-h-[100px] h-full bg-[#C4C4C4] relative overflow-hidden`,
                                 ImagesAlbum.length === 2 &&
                                 "h-[300px] [&:nth-child(1)]:rounded-s-2xl [&:nth-child(2)]:rounded-r-2xl",

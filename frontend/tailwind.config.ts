@@ -20,7 +20,10 @@ const config: Config = {
         "TextPrimary": "#6C7263"
       },
       dropShadow: {
-        "button": "0 4px 3px #999"
+        "button": "0 4px 3px #999",
+      },
+      boxShadow: {
+        "sombra": "1px 6px 10px -5px #000"
       }
     },
   },

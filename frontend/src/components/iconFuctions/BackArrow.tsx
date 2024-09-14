@@ -3,13 +3,17 @@
 import { useRouter } from "next/navigation";
 import { IconFlechaAtras } from "../icons";
 
-export function BackArrow() {
+interface Prop {
+    className?: string
+}
+
+export function BackArrow({ className }: Prop) {
 
     const router = useRouter()
 
     return (
         <div onClick={router.back}>
-            <IconFlechaAtras className="text-gray-500 cursor-pointer" />
+            <IconFlechaAtras className={`text-gray-500 cursor-pointer ${className && className}`} />
         </div>
     )
 }

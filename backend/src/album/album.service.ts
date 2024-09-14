@@ -78,4 +78,9 @@ export class AlbumService {
     });
     return foundAlbums;
   }
+
+  async findAllAlbums() {
+    const foundAllAlbums = await this.albumModel.find();
+    return foundAllAlbums;
+  }
 }

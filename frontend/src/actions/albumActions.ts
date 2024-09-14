@@ -1,18 +1,24 @@
 'use server'
-import { CountryWithoutDescription, PhotoFromAlbum } from '@/interfaces/album'
+import {
+  AlbumFromFetch,
+  CountryWithoutDescription,
+  PhotoFromAlbum,
+} from '@/interfaces/album'
 import { createAlbumService } from '@/services/albumService'
+import { revalidatePath } from 'next/cache'
+import { notFound, redirect } from 'next/navigation'
+const BASE_URL = process.env.API_URL
 
 export async function createAlbumAction(
   albumImages: PhotoFromAlbum[],
   markerCoordinates: CountryWithoutDescription | null,
   tags: string[],
   token: string | null,
+  description: string,
   prevState: any,
   formData: FormData
 ) {
   const title = formData.get('title') as string
-  const description = formData.get('description') as string
-  console.log(token)
   const fields = {
     title: title,
     description: description,
@@ -72,4 +78,47 @@ export async function updateAlbumAction(
   }
   console.log(fields)
   return { ...prevState }
+}
+
+export async function getAlbumsByTag(tag: string) {
+  const url = BASE_URL + '/album/search?q=' + tag
+  const data = await fetch(url)
+  const results: AlbumFromFetch[] = await data.json()
+
+  if (results) {
+    return results
+  }
+
+  return []
+}
+
+
+export const getAlbumById = async (id: string): Promise<AlbumFromFetch> => {
+
+  const url = BASE_URL + `/album/${id}`
+  const data = await fetch(url)
+  const results: AlbumFromFetch = await data.json()
+
+  if (!results) {
+    redirect(notFound())
+  }
+
+  revalidatePath(url)
+  return results
+
+}
+
+export const getAlbumByUser = async (id: string) => {
+
+  const url = BASE_URL + `/album/user/${id}`
+  const data = await fetch(url)
+  const results: AlbumFromFetch[] = await data.json()
+
+  if (!results) {
+    redirect(notFound())
+  }
+
+  revalidatePath(url)
+  return results
+
 }

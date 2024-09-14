@@ -2,6 +2,8 @@ import { IconBook, IconHome, IconPlusCircle, IconSearch, IconUser } from "@/comp
 import Link from "next/link";
 
 export function Footer() {
+
+
     return (
         <footer className="bg-FondoPrimary sticky bottom-0 left-0 right-0 text-white rounded-t-2xl py-2 px-2 mt-16 flex justify-between sm:px-6 z-10">
 
@@ -27,7 +29,7 @@ export function Footer() {
                 </Link>
             </div>
 
-            <Link href={"/perfil/william96"} className="flex flex-col items-center justify-center">
+            <Link href={"/perfil/66e1fca2088ce50d7e07a626"} className="flex flex-col items-center justify-center">
                 <IconUser />
                 <p>Perfil</p>
             </Link>
