@@ -50,6 +50,7 @@ const AUTH_ROUTES = [
 ]
 
 export function Footer() {
+
     const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [userId, setUserId] = useState<string | null>('')
 
@@ -80,12 +81,14 @@ export function Footer() {
                     <p>{route.label}</p>
                 </Link>
             ))}
-            {isAuthenticated && (
-                <button type='button' onClick={handleLogout} className='text-white flex flex-col items-center justify-center'>
-                    <IconUser />
-                    <p>Logout</p>
-                </button>
-            )}
-        </footer>
+            {
+                isAuthenticated && (
+                    <button type='button' onClick={handleLogout} className='text-white flex flex-col items-center justify-center'>
+                        <IconUser />
+                        <p>Logout</p>
+                    </button>
+                )
+            }
+        </footer >
     )
 }

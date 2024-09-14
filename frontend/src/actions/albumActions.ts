@@ -5,6 +5,8 @@ import {
   PhotoFromAlbum,
 } from '@/interfaces/album'
 import { createAlbumService } from '@/services/albumService'
+import { revalidatePath } from 'next/cache'
+import { notFound, redirect } from 'next/navigation'
 const BASE_URL = process.env.API_URL
 
 export async function createAlbumAction(
@@ -88,4 +90,35 @@ export async function getAlbumsByTag(tag: string) {
   }
 
   return []
+}
+
+
+export const getAlbumById = async (id: string): Promise<AlbumFromFetch> => {
+
+  const url = BASE_URL + `/album/${id}`
+  const data = await fetch(url)
+  const results: AlbumFromFetch = await data.json()
+
+  if (!results) {
+    redirect(notFound())
+  }
+
+  revalidatePath(url)
+  return results
+
+}
+
+export const getAlbumByUser = async (id: string) => {
+
+  const url = BASE_URL + `/album/user/${id}`
+  const data = await fetch(url)
+  const results: AlbumFromFetch[] = await data.json()
+
+  if (!results) {
+    redirect(notFound())
+  }
+
+  revalidatePath(url)
+  return results
+
 }

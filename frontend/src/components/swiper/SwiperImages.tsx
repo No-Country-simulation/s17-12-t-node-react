@@ -7,7 +7,6 @@ import "swiper/css"
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import { ImagesAlbum } from "@/utils";
 import Image from "next/image";
 import { PhotoFromAlbum } from "@/interfaces/album";
 
@@ -18,13 +17,13 @@ export function SwiperImages({ images }: { images: PhotoFromAlbum[] }) {
             modules={[Pagination, Navigation]}
             pagination={{ clickable: true }}
             navigation={{}}
-            className="h-[216px] mt-4"
+            className="h-[216px] mt-4 sm:h-[500px]"
             slidesPerView={1}
         >
             {
                 images.map((image, i) => (
                     <SwiperSlide key={i} className="relative" >
-                        <Image width={1400} height={1000} src={image.url} alt={image.description} className="object-cover h-full w-full" />
+                        <Image fill src={image.url} alt={image.description} className="object-cover" />
                     </SwiperSlide>
                 ))
             }

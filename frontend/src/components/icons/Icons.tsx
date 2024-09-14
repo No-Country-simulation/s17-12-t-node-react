@@ -1,5 +1,5 @@
 import { BsChatDots } from "react-icons/bs";
-import { FaHeart, FaHome, FaRegBookmark, FaRegHeart, FaRegImage, FaUser } from "react-icons/fa"
+import { FaBookmark, FaHeart, FaHome, FaRegBookmark, FaRegHeart, FaRegImage, FaUser } from "react-icons/fa"
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoLocationSharp, IoSearchSharp, IoSettingsSharp } from "react-icons/io5";
 import { LiaPaperPlaneSolid } from "react-icons/lia";
@@ -27,6 +27,9 @@ export const IconPlusCircle = ({ className, size = 60 }: IconProps) => {
 }
 export const IconBook = ({ className, size = 30 }: IconProps) => {
     return <FaRegBookmark size={size} className={className} />
+}
+export const IconBookLleno = ({ className, size = 30 }: IconProps) => {
+    return <FaBookmark size={size} className={className} />
 }
 export const IconLocation = ({ className, size = 30 }: IconProps) => {
     return <IoLocationSharp size={size} className={className} />
