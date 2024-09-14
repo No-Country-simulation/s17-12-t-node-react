@@ -42,7 +42,6 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
                 <AVisitar album={album} />
             </div>
 
-            <p className="px-10 truncate">{album.description}</p>
             <div className="flex flex-wrap px-10">
                 <Link href={'/perfil/' + album.userId}><strong>{album.userId}:</strong></Link>
                 {
