@@ -1,16 +1,18 @@
 import Image from "next/image";
-import { IconBook, IconChat, IconCorazon, IconLocation, IconPaper } from "../icons";
+import { IconChat, IconLocation, IconPaper } from "../icons";
 import { SwiperImages } from "../swiper/SwiperImages";
 import userImage from "/public/feed/user/image7.jpg"
 import { AlbumFromFetch } from "@/interfaces/album";
+import { LikeButton } from "@/components";
+
 import Link from "next/link";
 import ReadOnlyEditor from "../LexicalEditor/ReadOnly";
 import { getUserById } from "@/actions/userActions";
+import AVisitar from "../iconFuctions/AVisitar";
+
 
 export async function CardFeed({ album }: { album: AlbumFromFetch }) {
-
     const user = await getUserById(album.userId)
-    // console.log(album);
     return (
         <div className="mt-10">
 
@@ -32,12 +34,12 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
             {/* DESCRIPCIÓN  */}
             <div className="flex justify-between py-4 px-4 text-TextPrimary">
                 <div className="flex gap-4 ">
-                    <IconCorazon />
+                    <LikeButton id={album.id} />
                     <IconChat />
                     <IconPaper />
                 </div>
 
-                <IconBook />
+                <AVisitar album={album} />
             </div>
 
             <div className="flex flex-wrap px-10">
