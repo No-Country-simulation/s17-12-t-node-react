@@ -17,7 +17,7 @@ const config: Config = {
         "FondoPrimary": "#868F7A",
 
         // textos
-        "TextPrimary": "#6C7263"
+        "TextPrimary": "#5A6A45"
       },
       dropShadow: {
         "button": "0 4px 3px #999",

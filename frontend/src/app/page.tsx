@@ -23,7 +23,7 @@ export default async function Home() {
     // </main>
 
     <>
-      <div className="py-8 px-2 ">
+      <div className="py-8 px-2">
         <Suspense fallback={<span>Cargando usuarios</span>}>
           <SwiperUsers users={userResults} />
         </Suspense>
