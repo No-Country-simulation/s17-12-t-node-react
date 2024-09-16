@@ -9,11 +9,13 @@ import { InjectModel } from '@nestjs/mongoose';
 import mongoose from 'mongoose';
 import { User } from './entities/user.entity';
 import { HashAdapter } from 'src/common/adapters/hash.adapter';
+import { Album } from 'src/album/schemas';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name) private userModel: mongoose.Model<User>,
+    @InjectModel(Album.name) private albumModel: mongoose.Model<Album>, // This is the missing one
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
@@ -70,5 +72,50 @@ export class UserService {
       throw new NotFoundException(`User with email ${email} not exists`);
 
     return userFound;
+  }
+
+  async favUnFav(
+    userId: mongoose.Types.ObjectId,
+    albumId: mongoose.Types.ObjectId,
+  ) {
+    console.log(`user id is : ${JSON.stringify(userId)}`);
+    const albumFound = await this.albumModel.findById(albumId);
+    if (!albumFound) {
+      throw new NotFoundException(`Album with id ${albumId} not found`);
+    }
+
+    const user = await this.userModel.findById(userId);
+    const alreadyFav = user.favs.some((fav) => {
+      console.log(typeof fav);
+
+      return fav === albumId;
+    });
+    if (alreadyFav) {
+      //unfav
+      // Remove albumId from favs array using Mongoose's pull method
+      user.favs = user.favs.filter((fav) => {
+        console.log(typeof fav);
+        return fav !== albumId;
+      });
+
+      // Save the updated user object
+      await user.save();
+      return {
+        message: 'Se ha dado unfav a esta porqueria!!!',
+        data: user,
+      };
+    }
+
+    // Fav: Add albumId to favs
+    user.favs.push(albumId);
+    await user.save();
+
+    console.log(`album found is: ${JSON.stringify(albumFound)}`);
+    //await albumFound.save();
+    return {
+      message:
+        'Se ha dado fav a esta porqueria que sigue siendo una porqueria!!!',
+      data: user,
+    };
   }
 }

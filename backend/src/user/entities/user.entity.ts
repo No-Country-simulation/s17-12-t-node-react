@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-
+import { Types, Document } from 'mongoose';
 @Schema({
   timestamps: true,
 })
-export class User {
+export class User extends Document {
   @Prop({
     unique: true,
     required: true,
@@ -53,6 +53,11 @@ export class User {
 
   @Prop()
   imageUrl: string;
+
+  @Prop({
+    type: [{ type: Types.ObjectId, ref: 'Album' }],
+  })
+  favs: Types.ObjectId[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
