@@ -10,7 +10,7 @@ interface Props {
 export default function NavBar({ params }: Props) {
 
     const pathName = usePathname()
-    const userId = localStorage.getItem("user")
+    const userId = localStorage.getItem("userId")
 
     const listPerfil = [{ url: `/perfil/${params}`, title: "Album" }, { url: `/perfil/${params}/favorite`, title: "A visitar" }]
 
