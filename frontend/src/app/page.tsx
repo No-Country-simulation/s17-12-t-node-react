@@ -1,8 +1,10 @@
 import { CardFeed, SwiperUsers } from "@/components"
 import { AlbumFromFetch } from "@/interfaces/album"
 import { User } from "@/interfaces/user"
+import logo from "/public/logo.webp"
 import { Footer } from "@/ui"
 import { Suspense } from "react"
+import Image from "next/image"
 
 const BASE_URL = process.env.API_URL
 
@@ -24,6 +26,9 @@ export default async function Home() {
 
     <>
       <div className="py-8 px-2">
+        <figure>
+          <Image src={logo} alt="" className="mx-auto py-6 h-[90px] w-auto" />
+        </figure>
         <Suspense fallback={<span>Cargando usuarios</span>}>
           <SwiperUsers users={userResults} />
         </Suspense>
