@@ -10,11 +10,11 @@ export default function TopMenu({ id }: { id: string }) {
 
 
     return (
-        <div className="flex justify-between bg-[#D9D9D9] pt-10 pb-2 px-2 text-[#979797]">
+        <div className="flex justify-between bg-FondoPrimary pt-10 pb-2 px-2 text-white">
             <Link href={'/'}>
                 <BackArrow />
             </Link>
-            <h1 className=" font-bold text-xl text-black">
+            <h1 className=" font-bold text-xl">
                 {
                     token === id ? "Mi Perfil" : "Perfil"
                 }

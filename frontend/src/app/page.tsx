@@ -1,7 +1,7 @@
 import { CardFeed, SwiperUsers } from "@/components"
 import { AlbumFromFetch } from "@/interfaces/album"
 import { User } from "@/interfaces/user"
-import logo from "/public/logo.webp"
+import logo from "/public/logo.svg"
 import { Footer } from "@/ui"
 import { Suspense } from "react"
 import Image from "next/image"
@@ -25,9 +25,9 @@ export default async function Home() {
     // </main>
 
     <>
-      <div className="py-8 px-2">
-        <figure>
-          <Image src={logo} alt="" className="mx-auto py-6 h-[90px] w-auto" />
+      <div className="pb-8 px-2">
+        <figure className="w-full border-b">
+          <Image src={logo} alt="oh my trip logo" className="mx-auto h-8 w-48 my-6" />
         </figure>
         <Suspense fallback={<span>Cargando usuarios</span>}>
           <SwiperUsers users={userResults} />

@@ -42,8 +42,8 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
                 <AVisitar album={album} />
             </div>
 
-            <div className="flex flex-wrap px-10">
-                <Link href={'/perfil/' + album.userId}><strong>{album.userId}:</strong></Link>
+            <div className="flex flex-wrap px-4">
+                <Link href={'/perfil/' + album.userId} className="font-bold underline">{user?.username}:</Link>
                 {
                     album.description.includes('"root":')
                         ? <ReadOnlyEditor feed savedContent={album.description} />
