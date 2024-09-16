@@ -19,7 +19,6 @@ export default async function PerfilLayout({ children, params }: Props) {
     const url = BASE_URL + '/user/' + id
     const data = await fetch(url)
     const profile: User = await data.json()
-    console.log(profile);
 
     // const user: User = await getUser()
 
@@ -29,7 +28,7 @@ export default async function PerfilLayout({ children, params }: Props) {
     return (
         <div>
             <div className="flex justify-between bg-[#D9D9D9] pt-10 pb-2 px-2 text-[#979797]">
-                <Link href={'/feed'}>
+                <Link href={'/'}>
                     <BackArrow />
                 </Link>
                 <h1 className=" font-bold text-xl text-black">Mi Perfil</h1>

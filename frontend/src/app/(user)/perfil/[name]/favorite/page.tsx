@@ -6,8 +6,17 @@ import imageMapa from "/public/mapa.png"
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function FavoritePage() {
+
+    const route = useRouter()
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+        route.push("/login")
+    }
+
     const getAlbum = albumStore(state => state.getAlbum)
 
     // Función para manejar las clases de layout del grid

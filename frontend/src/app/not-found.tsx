@@ -13,7 +13,7 @@ export default function NotFoundPage() {
                 <Image src={notfound} alt="404" />
                 <p className="text-center mr-20 text-TextPrimary font-bold">ooh !! <br /> por aquí  no es:)
                 </p>
-                <Link href={"/feed"}>
+                <Link href={"/"}>
                     <button className="text-TextPrimary bg-[#F3F3F3] px-8 py-2 rounded-2xl mt-6 drop-shadow-button">Volver al inicio</button>
                 </Link>
             </div>

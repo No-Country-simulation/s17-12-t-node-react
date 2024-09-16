@@ -20,7 +20,6 @@ export async function createAlbumService(
       body: JSON.stringify({ ...albumData }),
       cache: 'no-cache',
     })
-    console.log(response)
 
     return response.json()
   } catch (error) {

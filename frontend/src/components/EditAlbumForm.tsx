@@ -42,7 +42,6 @@ export default function EditAlbumForm({ initialData }: EditAlbumFormProps) {
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files!
-    console.log(files)
 
     if (files) {
       for (let i = 0; i < files.length; i++) {

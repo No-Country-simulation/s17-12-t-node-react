@@ -6,7 +6,6 @@ const BASE_URL = process.env.API_URL
 export async function patchUserService(id: string, userData: UserWithoutId) {
   const url = BASE_URL + '/user/' + id
 
-  console.log(url)
   const response = await fetch(url, {
     method: 'PATCH',
     headers: {

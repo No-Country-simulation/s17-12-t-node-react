@@ -1,1 +1,1 @@
-export { ImagesAlbum } from "./ImagesUser"
+export { ImagesUser, imagesAlbum } from "./ImagesUser"
