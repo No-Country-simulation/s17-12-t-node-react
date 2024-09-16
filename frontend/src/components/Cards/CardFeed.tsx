@@ -14,7 +14,7 @@ import AVisitar from "../iconFuctions/AVisitar";
 export async function CardFeed({ album }: { album: AlbumFromFetch }) {
     const user = await getUserById(album.userId)
     return (
-        <div className="mt-10">
+        <div className="mt-10 border py-6 rounded-[30px] md:rounded-[50px] shadow-sombra">
 
             {/* AVATAR Y LOCATION  */}
             <div className="grid grid-cols-2 px-4 text-TextPrimary">

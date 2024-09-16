@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 const DEFAULT_ROUTES = [
     {
-        url: '/feed',
+        url: '/',
         icon: <IconHome />,
         label: 'Inicio',
     },
@@ -28,7 +28,7 @@ const DEFAULT_ROUTES = [
 
 const AUTH_ROUTES = [
     {
-        url: '/feed',
+        url: '/',
         icon: <IconHome />,
         label: 'Inicio',
     },

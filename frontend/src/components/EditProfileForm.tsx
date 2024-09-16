@@ -7,6 +7,7 @@ import { SubmitButton } from "./SubmitButton"
 import { useState } from "react"
 import Image from "next/image"
 import { uploadSingleImage } from "@/services/uploadImageService"
+import { useRouter } from "next/navigation"
 
 const INITIAL_STATE = {
   data: null,
@@ -17,6 +18,14 @@ interface EditProfileProps {
 }
 
 const EditProfileForm: React.FC<EditProfileProps> = ({ user }) => {
+
+  const route = useRouter()
+  const token = localStorage.getItem("token")
+
+  if (!token) {
+    route.push("/register")
+  }
+
   const [profileImg, setProfileImg] = useState<string>('imageUrl' in user ? user.imageUrl : '')
   const updateUserComplete = updateUserAction.bind(null, profileImg, user)
   const [formState, formAction] = useFormState(

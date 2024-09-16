@@ -26,6 +26,7 @@ export default function LoginForm() {
       localStorage.setItem("userId", formState.id)
 
       if (formState.id) {
+        localStorage.setItem("userId", formState.id)
         router.push(`/perfil/${formState.id}`)
       }
     }

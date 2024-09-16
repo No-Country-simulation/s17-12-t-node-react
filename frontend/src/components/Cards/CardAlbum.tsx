@@ -1,5 +1,4 @@
 import { PhotoFromAlbum } from "@/interfaces/album";
-import { ImagesAlbum } from "@/utils";
 import clsx from "clsx";
 import Image from "next/image";
 

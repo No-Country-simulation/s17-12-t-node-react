@@ -8,7 +8,6 @@ export default async function PreferencesPage({ params }: { params: { _id: strin
   const url = BASE_URL + '/user/' + id
   const data = await fetch(url)
   const profile = await data.json()
-  console.log(profile)
 
   return (
     <div className="bg-white w-full min-h-screen text-black relative flex flex-col justify-center">

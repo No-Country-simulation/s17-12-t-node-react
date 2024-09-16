@@ -40,7 +40,6 @@ export default function CreateAlbumForm() {
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files!
-    console.log(files)
 
     if (files) {
       for (let i = 0; i < files.length; i++) {
@@ -77,7 +76,7 @@ export default function CreateAlbumForm() {
 
   useEffect(() => {
     if (formState.success) {
-      router.push(`/feed`)
+      router.push(`/`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formState?.success]);
