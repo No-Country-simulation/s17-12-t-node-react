@@ -14,8 +14,8 @@ import { Album } from 'src/album/schemas';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectModel(User.name) private readonly albumModel: mongoose.Model<Album>,
-    private userModel: mongoose.Model<User>,
+    @InjectModel(User.name) private userModel: mongoose.Model<User>,
+    @InjectModel(Album.name) private albumModel: mongoose.Model<Album>, // This is the missing one
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
