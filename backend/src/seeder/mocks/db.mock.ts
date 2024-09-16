@@ -7,9 +7,22 @@ import { User } from '../../user/entities/user.entity';
 
 export type UserType = User & { _id: Types.ObjectId };
 
+export type UserDTO = {
+  country: string;
+  email: string;
+  firstname: string;
+  lastname: string;
+  imageUrl: string;
+  isAdmin: boolean;
+  password: string;
+  tags: string[];
+  username: string;
+  description: string;
+};
+
 const getUsername = (email: string) => email.split('@')[0];
 
-export const USERS: User[] = Array(5)
+export const USERS: UserDTO[] = Array(5)
   .fill(null)
   .map(() => {
     const hashAdapter = new HashAdapter();
