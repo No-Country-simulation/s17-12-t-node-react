@@ -24,7 +24,7 @@ export function SwiperUsers({ users }: { users: User[] }) {
                     <SwiperSlide key={i} style={{ "display": "flex", "flexDirection": "column", "alignItems": "start", "minWidth": "80px", "overflow": "hidden" } as React.CSSProperties}>
                         <Link href={'/perfil/' + user._id}>
                             <Image src={user.imageUrl || imageAvatar} alt="foto" width={400} height={400} className="rounded-full object-cover size-20" />
-                            <h2 className="text-center flex-col truncate">{user.username}</h2>
+                            <h2 className="text-center flex-col truncate text-TextPrimary font-semibold">{user.username}</h2>
                         </Link>
                     </SwiperSlide>
                 ))
