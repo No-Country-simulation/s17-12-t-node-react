@@ -85,11 +85,18 @@ export class UserService {
     }
 
     const user = await this.userModel.findById(userId);
-    const alreadyFav = user.favs.some((fav) => fav.equals(albumId));
+    const alreadyFav = user.favs.some((fav) => {
+      console.log(typeof fav);
+
+      return fav === albumId;
+    });
     if (alreadyFav) {
       //unfav
       // Remove albumId from favs array using Mongoose's pull method
-      user.favs = user.favs.filter((fav) => !fav.equals(albumId));
+      user.favs = user.favs.filter((fav) => {
+        console.log(typeof fav);
+        return fav !== albumId;
+      });
 
       // Save the updated user object
       await user.save();
