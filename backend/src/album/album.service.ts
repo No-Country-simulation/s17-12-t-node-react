@@ -110,10 +110,6 @@ export class AlbumService {
       throw new NotFoundException(`Album with id ${id} not found`);
     }
 
-    /*  if (albumFound.likes.includes(userId)) {
-      console.log('Hola!!!!');
-      throw new ConflictException(`User ${userId} already likes this album`);
-    } */
     const alreadyLiked = albumFound.likes.some((like) =>
       like.userId.equals(userId),
     );
@@ -122,7 +118,7 @@ export class AlbumService {
       const updatedAlbum = await this.albumModel.findByIdAndUpdate(
         id, // Album ID
         {
-          $pull: { likes: { userId } }, // Add the userId to the likes array
+          $pull: { likes: { userId } }, // remove the userId from the likes array
         },
         { new: true }, // Return the updated document
       );
@@ -131,7 +127,7 @@ export class AlbumService {
         data: updatedAlbum,
       };
     }
-    //albumFound.likes.push(userId);
+
     const updatedAlbum = await this.albumModel.findByIdAndUpdate(
       id, // Album ID
       {
@@ -141,7 +137,7 @@ export class AlbumService {
     );
 
     console.log(`album found is: ${JSON.stringify(albumFound)}`);
-    //await albumFound.save();
+
     return {
       message:
         'Se ha dado like a esta porqueria que sigue siendo una porqueria!!!',

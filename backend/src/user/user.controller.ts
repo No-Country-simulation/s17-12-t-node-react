@@ -13,7 +13,10 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Auth, GetUser } from 'src/auth/decorators';
+import { ObjectIdValidationPipe } from 'src/common/pipes/object-id-validation.pipe';
+import mongoose, { Types } from 'mongoose';
 
 @Controller('user')
 @ApiTags('Users')
@@ -50,5 +53,16 @@ export class UserController {
     const user = await this.userService.remove(id);
     if (!user) throw new NotFoundException('User not found');
     return;
+  }
+
+  @ApiBearerAuth()
+  @Post('fav/:id')
+  @Auth()
+  async favUnFav(
+    @GetUser() user: User,
+    @Param('id', ObjectIdValidationPipe) albumId: mongoose.Types.ObjectId,
+  ) {
+    const userId = <mongoose.Types.ObjectId>user._id;
+    return await this.userService.favUnFav(userId, albumId);
   }
 }
