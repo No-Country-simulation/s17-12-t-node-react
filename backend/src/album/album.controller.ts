@@ -73,4 +73,14 @@ export class AlbumController {
   async delete(@Param('id', ObjectIdValidationPipe) id: string) {
     return await this.albumService.delete(id);
   }
+
+  @ApiBearerAuth()
+  @Post('like/:id')
+  @Auth()
+  async likeDislike(
+    @GetUser() user: UserTemporalType,
+    @Param('id', ObjectIdValidationPipe) albumId: string,
+  ) {
+    return await this.albumService.likeDislike(user._id, albumId);
+  }
 }

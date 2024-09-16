@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 
 import { Model, Types } from 'mongoose';
@@ -97,5 +101,47 @@ export class AlbumService {
   async findAllAlbums() {
     const foundAllAlbums = await this.albumModel.find();
     return foundAllAlbums;
+  }
+
+  async likeDislike(userId: Types.ObjectId, id: string) {
+    console.log(`user id is : ${JSON.stringify(userId)}`);
+    const albumFound = await this.albumModel.findById(id);
+    if (!albumFound) {
+      throw new NotFoundException(`Album with id ${id} not found`);
+    }
+
+    const alreadyLiked = albumFound.likes.some((like) =>
+      like.userId.equals(userId),
+    );
+    if (alreadyLiked) {
+      //dislike
+      const updatedAlbum = await this.albumModel.findByIdAndUpdate(
+        id, // Album ID
+        {
+          $pull: { likes: { userId } }, // remove the userId from the likes array
+        },
+        { new: true }, // Return the updated document
+      );
+      return {
+        message: 'Se ha dado dislike a esta porqueria!!!',
+        data: updatedAlbum,
+      };
+    }
+
+    const updatedAlbum = await this.albumModel.findByIdAndUpdate(
+      id, // Album ID
+      {
+        $push: { likes: { userId } }, // Add the userId to the likes array
+      },
+      { new: true }, // Return the updated document
+    );
+
+    console.log(`album found is: ${JSON.stringify(albumFound)}`);
+
+    return {
+      message:
+        'Se ha dado like a esta porqueria que sigue siendo una porqueria!!!',
+      data: updatedAlbum,
+    };
   }
 }

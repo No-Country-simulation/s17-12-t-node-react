@@ -8,7 +8,7 @@ import { User } from '../user/entities/user.entity';
 import { AlbumService } from '../album/album.service';
 import { UserService } from '../user/user.service';
 
-import { ALBUMS, type UserType, USERS } from './mocks/db.mock';
+import { ALBUMS, USERS } from './mocks/db.mock';
 import { faker } from '@faker-js/faker';
 
 @Injectable()
@@ -18,7 +18,7 @@ export class SeederService {
     @InjectModel(Album.name) private albumModel: mongoose.Model<Album>,
     private readonly userService: UserService,
     private readonly albumService: AlbumService,
-  ) { }
+  ) {}
 
   async executeSeed() {
     // delete all albums
@@ -36,13 +36,13 @@ export class SeederService {
     return 'Seed executed';
   }
 
-  async insertUsers(): Promise<UserType[]> {
+  async insertUsers(): Promise<User[]> {
     const insertedUsers = await this.userModel.insertMany(USERS);
 
     return insertedUsers;
   }
 
-  async insertAlbums(users: UserType[]) {
+  async insertAlbums(users: User[]) {
     const insertedAlbums = ALBUMS.map((album) => {
       const creator = users[Math.floor(Math.random() * users.length)];
 
