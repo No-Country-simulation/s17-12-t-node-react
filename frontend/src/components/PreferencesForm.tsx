@@ -74,7 +74,7 @@ const PreferencesForm: React.FC<UserProps> = ({ user }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-16 mx-6 flex flex-col gap-8">
+    <form onSubmit={handleSubmit} className="mt-20 mx-6 flex flex-col gap-8">
       <p>Seleccioná los temas que más te interesan para que podamos guiarte a encontrar las mejores opciones</p>
       <div className="flex flex-wrap gap-10">
         {INITIAL_VALUES.map((item) => (
@@ -85,7 +85,7 @@ const PreferencesForm: React.FC<UserProps> = ({ user }) => {
               }`}
           >
             <Image className="h-28" src={item.imageUrl} alt={`foto ${item.name}`} width={400} height={400} />
-            <p className="bg-slate-400 w-full text-center rounded-b-xl">{item.name}</p>
+            <p className="bg-FondoPrimary w-full text-white text-center rounded-b-xl">{item.name}</p>
             {tags.includes(item.name) && (
               <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
                 <span className="text-amber-500 text-6xl">✔</span>
@@ -94,7 +94,7 @@ const PreferencesForm: React.FC<UserProps> = ({ user }) => {
           </div>
         ))}
       </div>
-      <SubmitButton className="text-xl bg-slate-400 rounded h-12 mb-8 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Ingresá" />
+      <SubmitButton className="text-xl bg-FondoPrimary rounded h-12 mb-8 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Ingresar" />
       {error && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{error}</p>}
       {success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{success}</p>}
 
