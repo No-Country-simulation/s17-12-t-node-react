@@ -8,6 +8,8 @@ import Image from "next/image"
 
 const BASE_URL = process.env.API_URL
 
+export const revalidate = 0
+
 export default async function Home() {
   const albumUrl = BASE_URL + '/album/search?q='
   const albumData = await fetch(albumUrl)
