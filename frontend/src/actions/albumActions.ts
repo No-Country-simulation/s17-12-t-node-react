@@ -4,10 +4,15 @@ import {
   CountryWithoutDescription,
   PhotoFromAlbum,
 } from '@/interfaces/album'
-import { createAlbumService } from '@/services/albumService'
+import { createAlbumService, postCommentService } from '@/services/albumService'
 import { revalidatePath } from 'next/cache'
 import { notFound, redirect } from 'next/navigation'
+import { z } from 'zod'
 const BASE_URL = process.env.API_URL
+
+const schemaComment = z.object({
+  comment: z.string().min(1, 'El comentario no puede estar vacío.'),
+})
 
 export async function createAlbumAction(
   albumImages: PhotoFromAlbum[],
@@ -92,9 +97,7 @@ export async function getAlbumsByTag(tag: string) {
   return []
 }
 
-
 export const getAlbumById = async (id: string): Promise<AlbumFromFetch> => {
-
   const url = BASE_URL + `/album/${id}`
   const data = await fetch(url)
   const results: AlbumFromFetch = await data.json()
@@ -105,11 +108,9 @@ export const getAlbumById = async (id: string): Promise<AlbumFromFetch> => {
 
   revalidatePath(url)
   return results
-
 }
 
 export const getAlbumByUser = async (id: string) => {
-
   const url = BASE_URL + `/album/user/${id}`
   const data = await fetch(url)
   const results: AlbumFromFetch[] = await data.json()
@@ -120,5 +121,60 @@ export const getAlbumByUser = async (id: string) => {
 
   revalidatePath(url)
   return results
+}
 
+export async function postCommentAction(
+  albumId: string,
+  token: string | null,
+  prevState: any,
+  formData: FormData
+) {
+  const commentFromForm = formData.get('comment') as string
+  console.log('albumId', albumId)
+  console.log('token', token)
+  console.log('Comment', commentFromForm)
+
+  const validatedFields = schemaComment.safeParse({
+    comment: commentFromForm,
+  })
+
+  if (!validatedFields.success) {
+    console.log('paso por !validatedFields.success')
+    return {
+      ...prevState,
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: 'Debe rellenar todos los campos. Error al enviar comentario.',
+    }
+  }
+
+  const body = {
+    content: commentFromForm,
+    albumId: albumId,
+  }
+
+  const responseData = await postCommentService(body, token)
+
+  if (!responseData) {
+    return {
+      ...prevState,
+      errors: {},
+      message:
+        'Algo salió mal. Error al enviar el comentario:' +
+        responseData!.statusText,
+    }
+  }
+
+  if (!responseData.ok) {
+    return {
+      ...prevState,
+      errors: {},
+      message: 'Error al enviar el comentario: ' + responseData.statusText,
+    }
+  }
+
+  return {
+    ...prevState,
+    success: 'Comentario enviado exitosamente',
+    comments: [...prevState.comments, body],
+  }
 }

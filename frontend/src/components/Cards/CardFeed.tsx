@@ -9,6 +9,7 @@ import Link from "next/link";
 import ReadOnlyEditor from "../LexicalEditor/ReadOnly";
 import { getUserById } from "@/actions/userActions";
 import AVisitar from "../iconFuctions/AVisitar";
+import { Comments } from "@/ui/album/Comments";
 
 
 export async function CardFeed({ album }: { album: AlbumFromFetch }) {
@@ -35,7 +36,7 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
             <div className="flex justify-between py-4 px-4 text-TextPrimary">
                 <div className="flex gap-4 ">
                     <LikeButton id={album.id} />
-                    <IconChat />
+                    <Comments comments={album.comments} albumId={album.id} />
                     <IconPaper />
                 </div>
 
