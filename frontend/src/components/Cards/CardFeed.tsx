@@ -20,7 +20,7 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
             <div className="grid grid-cols-2 px-4 text-TextPrimary">
                 <div className="flex items-center gap-2 ">
                     <Image src={user ? user.imageUrl : userImage} width={400} height={400} alt="foto" className="object-cover size-11 rounded-full bg-gray-500" />
-                    <h2 className="font-bold">{album.tags[0]}</h2>
+                    <h2 className="font-bold">{album.tags[0].charAt(0).toUpperCase() + album.tags[0].slice(1)}</h2>
                 </div>
                 <div className="flex items-center">
                     <IconLocation />

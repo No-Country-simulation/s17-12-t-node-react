@@ -445,6 +445,7 @@ i.font {
   width: 100%;
   max-width: 250px;
   min-width: 100px;
+  text-align: start;
 }
 
 .item:hover {

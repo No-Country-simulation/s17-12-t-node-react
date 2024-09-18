@@ -56,6 +56,7 @@ export async function setUserTags(
 
 export async function updateUserAction(
   profileImg: string,
+  country: string | null,
   user: InitialUser,
   prevState: any,
   formData: FormData
@@ -66,7 +67,7 @@ export async function updateUserAction(
     email: (formData.get('email') as string) || user.email,
     firstname: formData.get('firstname') as string,
     lastname: formData.get('lastname') as string,
-    country: formData.get('country') as string,
+    country: country!,
     description: formData.get('description') as string,
     imageUrl: profileImg,
     isAdmin: user.isAdmin,

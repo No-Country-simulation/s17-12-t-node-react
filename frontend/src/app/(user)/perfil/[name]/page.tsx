@@ -6,6 +6,7 @@ import CardAlbum from "@/components/Cards/CardAlbum";
 import Image from "next/image";
 import Link from "next/link";
 
+export const revalidate = 0
 //cambiar name por id en algun momento
 export default async function PerfilPage({ params }: { params: { name: string } }) {
 

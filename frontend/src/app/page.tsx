@@ -5,6 +5,7 @@ import logo from "/public/logo.svg"
 import { Footer } from "@/ui"
 import { Suspense } from "react"
 import Image from "next/image"
+import { UsersSkeleton } from "@/ui/skeleton"
 
 const BASE_URL = process.env.API_URL
 
@@ -31,13 +32,13 @@ export default async function Home() {
         <figure className="w-full border-b">
           <Image src={logo} alt="oh my trip logo" className="mx-auto h-8 w-48 my-6" />
         </figure>
-        <Suspense fallback={<span>Cargando usuarios</span>}>
+        <Suspense>
           <SwiperUsers users={userResults} />
         </Suspense>
 
 
         {/* Card  */}
-        <Suspense fallback={<span>Cargando albums</span>}>
+        <Suspense>
           {albumResults.map((album) => (
             <CardFeed key={album.id} album={album} />
           ))}
