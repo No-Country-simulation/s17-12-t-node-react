@@ -5,7 +5,6 @@ import logo from "/public/logo.svg"
 import { Footer } from "@/ui"
 import { Suspense } from "react"
 import Image from "next/image"
-import { UsersSkeleton } from "@/ui/skeleton"
 
 const BASE_URL = process.env.API_URL
 
