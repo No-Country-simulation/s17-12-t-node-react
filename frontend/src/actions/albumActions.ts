@@ -7,12 +7,7 @@ import {
 import { createAlbumService, postCommentService } from '@/services/albumService'
 import { revalidatePath } from 'next/cache'
 import { notFound, redirect } from 'next/navigation'
-import { z } from 'zod'
 const BASE_URL = process.env.API_URL
-
-const schemaComment = z.object({
-  comment: z.string().min(1, 'El comentario no puede estar vacío.'),
-})
 
 export async function createAlbumAction(
   albumImages: PhotoFromAlbum[],
@@ -126,29 +121,10 @@ export const getAlbumByUser = async (id: string) => {
 export async function postCommentAction(
   albumId: string,
   token: string | null,
-  prevState: any,
-  formData: FormData
+  comment: string
 ) {
-  const commentFromForm = formData.get('comment') as string
-  console.log('albumId', albumId)
-  console.log('token', token)
-  console.log('Comment', commentFromForm)
-
-  const validatedFields = schemaComment.safeParse({
-    comment: commentFromForm,
-  })
-
-  if (!validatedFields.success) {
-    console.log('paso por !validatedFields.success')
-    return {
-      ...prevState,
-      errors: validatedFields.error.flatten().fieldErrors,
-      message: 'Debe rellenar todos los campos. Error al enviar comentario.',
-    }
-  }
-
   const body = {
-    content: commentFromForm,
+    content: comment,
     albumId: albumId,
   }
 
@@ -156,25 +132,19 @@ export async function postCommentAction(
 
   if (!responseData) {
     return {
-      ...prevState,
       errors: {},
-      message:
-        'Algo salió mal. Error al enviar el comentario:' +
-        responseData!.statusText,
+      message: 'Algo salió mal. Error al enviar el comentario',
     }
   }
 
   if (!responseData.ok) {
     return {
-      ...prevState,
       errors: {},
       message: 'Error al enviar el comentario: ' + responseData.statusText,
     }
   }
 
   return {
-    ...prevState,
     success: 'Comentario enviado exitosamente',
-    comments: [...prevState.comments, body],
   }
 }

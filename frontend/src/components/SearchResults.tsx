@@ -19,7 +19,7 @@ const SearchResults: React.FC<Props> = async ({ query }) => {
       {results.length > 0 ? (
         <>
           {results.map((item) => (
-            <Link href={'/album/' + item.id} key={item.id} className="flex border border-gray-300 p-1 mx-4 gap-4 items-center">
+            <Link href={'/album/' + item.id} key={item.id} className="flex border border-FondoPrimary p-1 mx-4 gap-4 items-center">
               {item.photos[0] && (
                 <Image src={item.photos[0].url} alt={item.photos[0].description} width={100} height={62} className="rounded-2xl h-[62px]" />
               )}

@@ -1,19 +1,32 @@
-import Image from "next/image";
-import { IconChat, IconLocation, IconPaper } from "../icons";
-import { SwiperImages } from "../swiper/SwiperImages";
+import Image from "next/image"
+import { IconLocation, IconPaper } from "../icons"
+import { SwiperImages } from "../swiper/SwiperImages"
 import userImage from "/public/feed/user/image7.jpg"
-import { AlbumFromFetch } from "@/interfaces/album";
-import { LikeButton } from "@/components";
+import { AlbumFromFetch } from "@/interfaces/album"
+import { LikeButton } from "@/components"
 
-import Link from "next/link";
-import ReadOnlyEditor from "../LexicalEditor/ReadOnly";
-import { getUserById } from "@/actions/userActions";
-import AVisitar from "../iconFuctions/AVisitar";
-import { Comments } from "@/ui/album/Comments";
+import Link from "next/link"
+import ReadOnlyEditor from "../LexicalEditor/ReadOnly"
+import { getUserById } from "@/actions/userActions"
+import AVisitar from "../iconFuctions/AVisitar"
+import { Comments } from "@/components/Comments"
+import { Suspense } from "react"
+import { Spinner } from "@/ui/spinner"
 
 
 export async function CardFeed({ album }: { album: AlbumFromFetch }) {
     const user = await getUserById(album.userId)
+
+    const commentsWithUsernames = await Promise.all(
+        album.comments.map(async (comment) => {
+            const user = await getUserById(comment.userId as string)
+            return {
+                ...comment,
+                username: user?.username || "Usuario desconocido",
+            }
+        })
+    )
+
     return (
         <div className="mt-10 border py-6 rounded-[30px] md:rounded-[50px] shadow-sombra">
 
@@ -36,7 +49,9 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
             <div className="flex justify-between py-4 px-4 text-TextPrimary">
                 <div className="flex gap-4 ">
                     <LikeButton id={album.id} />
-                    <Comments comments={album.comments} albumId={album.id} />
+                    <Suspense fallback={<Spinner />}>
+                        <Comments feed comments={commentsWithUsernames} albumId={album.id} />
+                    </Suspense>
                     <IconPaper />
                 </div>
 
