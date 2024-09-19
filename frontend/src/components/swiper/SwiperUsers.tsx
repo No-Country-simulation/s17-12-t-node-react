@@ -25,8 +25,8 @@ export function SwiperUsers({ users }: { users: User[] }) {
         >
             {
                 users.map((user, i) => (
-                    <SwiperSlide key={i} style={{ "display": "flex", "alignItems": "start", "minWidth": "80px", "overflow": "hidden", "justifyContent": "space-between" } as React.CSSProperties}>
-                        <Link href={'/perfil/' + user._id}>
+                    <SwiperSlide key={i} style={{ "display": "flex", "justifyContent": "space-between", } as React.CSSProperties}>
+                        <Link href={'/perfil/' + user._id} className=" w-[100px] text-ellipsis overflow-hidden">
                             <Image
                                 src={user.imageUrl || imageAvatar}
                                 alt="foto"
@@ -35,7 +35,7 @@ export function SwiperUsers({ users }: { users: User[] }) {
                                 className="rounded-full object-cover size-20 mx-auto"
                                 onLoad={() => setLoading(false)}
                             />
-                            <h2 className="text-center flex-col truncate text-TextPrimary font-semibold">{user.username}</h2>
+                            <h2 className=" text-center flex-col text-TextPrimary font-semibold">{user.username}</h2>
                         </Link>
                         {loading && (
                             Array.from({ length: 2 }).map((_, i) => (
