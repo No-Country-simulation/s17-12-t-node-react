@@ -111,7 +111,7 @@ export const getUser = async () => {
   ).then((res) => res.json())
 
   if (users) {
-    return users[0]
+    return users
   }
 
   return { message: 'No se pudo obtener los usuarios' }

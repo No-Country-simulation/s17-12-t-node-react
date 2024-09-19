@@ -1,11 +1,11 @@
 "use client"
 
+import imageAvatar from "/public/image/avatarUser.png"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { User } from "@/interfaces/user"
 import Image from "next/image"
-import imageAvatar from "/public/image/avatarUser.png"
-import "swiper/css"
 import Link from "next/link"
+import "swiper/css"
 
 export function SwiperUsers({ users }: { users: User[] }) {
     return (
