@@ -90,7 +90,7 @@ export function Comments({ comments, albumId, feed }: CommentsProps) {
                 value={newComment.content}
                 onChange={handleChange}
                 placeholder="Escribe un comentario..."
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
+                className="w-full px-3 py-2 border border-FondoPrimary rounded-lg focus:outline-none focus:ring focus:ring-FondoPrimary"
               />
               <SubmitButton
                 className="w-full mt-3 text-xl bg-FondoPrimary rounded h-12 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]"
