@@ -1,4 +1,4 @@
-[![Global Link](/resources/logo.webp)](https://frontend-nu-five-59.vercel.app/)
+[![Global Link](/resources/logo.webp)](https://ohmytrip-nocountry.vercel.app)
 
 ## Descripción
 
