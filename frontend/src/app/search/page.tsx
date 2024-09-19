@@ -4,6 +4,8 @@ import SearchResults from "@/components/SearchResults"
 import SearchResultsSkeleton from "@/ui/skeleton/searchResultsSkeleton";
 import { Suspense } from "react";
 
+export const revalidate = 0
+
 export default async function SearchPage({
   searchParams,
 }: {
