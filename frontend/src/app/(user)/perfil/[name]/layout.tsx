@@ -14,6 +14,8 @@ interface Props {
 
 const BASE_URL = process.env.API_URL
 
+export const revalidate = 0
+
 export default async function PerfilLayout({ children, params }: Props) {
 
     const id = params.name

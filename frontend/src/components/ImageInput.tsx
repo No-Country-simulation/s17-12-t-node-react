@@ -35,7 +35,7 @@ const ImageDescription: React.FC<Props> = ({ url, descriptionPhoto, saveDescript
         <button
           type="button"
           onClick={() => setShowInput(!showInput)}
-          className={`mt-2 bg-green-500 ${description ? 'bg-cyan-600' : 'bg-green-500'} text-white p-2 rounded`}
+          className={`mt-2 bg-FondoPrimary ${description ? 'bg-cyan-600' : 'bg-green-500'} text-white p-2 rounded`}
         >{description ? 'Editar' : 'Agregar Descripción'}</button>
       )}
     </>

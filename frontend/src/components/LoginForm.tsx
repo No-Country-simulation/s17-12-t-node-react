@@ -39,7 +39,7 @@ export default function LoginForm() {
       <div className="flex items-end px-4 justify-between">
         <label htmlFor="email">Email</label>
         <input
-          className="border-b border-gray-400 focus-visible:outline-none"
+          className="border-b border-FondoPrimary focus-visible:outline-none"
           type="email"
           id="email"
           name="email"
@@ -51,7 +51,7 @@ export default function LoginForm() {
       <div className="flex items-end px-4 justify-between">
         <label htmlFor="password">Contraseña</label>
         <input
-          className="border-b border-gray-400 focus-visible:outline-none"
+          className="border-b border-FondoPrimary focus-visible:outline-none"
           type="password"
           id="password"
           name="password"
@@ -60,7 +60,7 @@ export default function LoginForm() {
       </div>
       {formState?.errors?.password && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.errors?.password}</p>}
 
-      <div className="flex flex-col border-t border-gray-400 py-6 mt-6 mx-4 text-center gap-6">
+      <div className="flex flex-col border-t border-FondoPrimary py-6 mt-6 mx-4 text-center gap-6">
         <h3>Inicia sesión con</h3>
         <div className="flex justify-evenly">
           <button className="p-2 rounded-xl shadow-[0_4px_4px_0px_rgba(0,0,0,0.25)]">
@@ -75,7 +75,7 @@ export default function LoginForm() {
         </div>
       </div>
 
-      <SubmitButton className="text-xl bg-slate-400 rounded h-12 mx-4 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Iniciar Sesión" />
+      <SubmitButton className="text-xl bg-FondoPrimary rounded h-12 mx-4 text-white shadow-[0_4px_4px_0px_rgba(0,0,0,0.15)]" loadingText="Cargando..." text="Ingresá" />
       {formState?.loginError && <p className="-mt-4 mx-4 text-end text-red-500 text-xs">{formState?.message}: {formState?.loginError}</p>}
       {formState?.success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{formState?.success}</p>}
     </form>

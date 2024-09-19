@@ -9,6 +9,7 @@ import Link from "next/link";
 import ReadOnlyEditor from "../LexicalEditor/ReadOnly";
 import { getUserById } from "@/actions/userActions";
 import AVisitar from "../iconFuctions/AVisitar";
+import { Comments } from "@/ui/album/Comments";
 
 
 export async function CardFeed({ album }: { album: AlbumFromFetch }) {
@@ -20,7 +21,7 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
             <div className="grid grid-cols-2 px-4 text-TextPrimary">
                 <div className="flex items-center gap-2 ">
                     <Image src={user ? user.imageUrl : userImage} width={400} height={400} alt="foto" className="object-cover size-11 rounded-full bg-gray-500" />
-                    <h2 className="font-bold">{album.tags[0]}</h2>
+                    <h2 className="font-bold">{album.tags[0].charAt(0).toUpperCase() + album.tags[0].slice(1)}</h2>
                 </div>
                 <div className="flex items-center">
                     <IconLocation />
@@ -35,14 +36,14 @@ export async function CardFeed({ album }: { album: AlbumFromFetch }) {
             <div className="flex justify-between py-4 px-4 text-TextPrimary">
                 <div className="flex gap-4 ">
                     <LikeButton id={album.id} />
-                    <IconChat />
+                    <Comments comments={album.comments} albumId={album.id} />
                     <IconPaper />
                 </div>
 
                 <AVisitar album={album} />
             </div>
 
-            <div className="flex flex-wrap px-4">
+            <div className="flex flex-col flex-wrap px-4">
                 <Link href={'/perfil/' + album.userId} className="font-bold underline">{user?.username}:</Link>
                 {
                     album.description.includes('"root":')

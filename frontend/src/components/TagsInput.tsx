@@ -46,7 +46,8 @@ export const TagsInput: React.FC<Props> = ({ tags, setTags }) => {
       {tags.length > 0 && (
         <div className="flex flex-wrap gap-2 mt-2">
           {tags.map((tag, index) => (
-            <div key={index} className="relative">
+            <div key={index} className={`relative ${tag.includes(',') ? 'hidden' : ''}`}>
+              {/* Arreglo provisorio para no mostrar el tag de ubicacion pero si enviarlo */}
               <span className="px-2 py-1 bg-blue-200 rounded-lg">{tag}</span>
               <button
                 onClick={() => handleDeleteCategory(tag)}

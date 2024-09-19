@@ -33,8 +33,15 @@ interface AlbumFromFetch {
   tags: string[]
   userId: string
   likes: []
-  comments: []
+  comments: Comment[]
   createdAt: string
   updatedAt: string
   id: string
+}
+
+interface Comment {
+  userId?: string
+  content: string
+  _id?: string
+  createdAt?: string
 }

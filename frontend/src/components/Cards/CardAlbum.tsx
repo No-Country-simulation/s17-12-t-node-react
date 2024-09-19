@@ -25,7 +25,7 @@ export default function CardAlbum({ photos }: Props) {
         photos.map((ima: any, i: number) => (
           <div key={i} className={clsx(`min-h-[100px] h-full bg-[#C4C4C4] relative overflow-hidden`,
             photos.length === 2 &&
-            "h-[350px] [&:nth-child(1)]:rounded-s-2xl [&:nth-child(2)]:rounded-r-2xl",
+            "[&:nth-child(1)]:rounded-s-2xl [&:nth-child(1)]:h-[350px] [&:nth-child(2)]:rounded-r-2xl",
             photos.length === 3 &&
             `[&:nth-child(1)]:rounded-tl-2xl [&:nth-child(1)]:h-[200px] sm:[&:nth-child(1)]:h-[300px]
                                  [&:nth-child(2)]:rounded-tr-2xl

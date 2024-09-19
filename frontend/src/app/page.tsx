@@ -8,6 +8,8 @@ import Image from "next/image"
 
 const BASE_URL = process.env.API_URL
 
+export const revalidate = 0
+
 export default async function Home() {
   const albumUrl = BASE_URL + '/album/search?q='
   const albumData = await fetch(albumUrl)
@@ -29,13 +31,13 @@ export default async function Home() {
         <figure className="w-full border-b">
           <Image src={logo} alt="oh my trip logo" className="mx-auto h-8 w-48 my-6" />
         </figure>
-        <Suspense fallback={<span>Cargando usuarios</span>}>
+        <Suspense>
           <SwiperUsers users={userResults} />
         </Suspense>
 
 
         {/* Card  */}
-        <Suspense fallback={<span>Cargando albums</span>}>
+        <Suspense>
           {albumResults.map((album) => (
             <CardFeed key={album.id} album={album} />
           ))}

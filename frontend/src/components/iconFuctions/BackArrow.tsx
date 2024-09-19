@@ -13,7 +13,7 @@ export function BackArrow({ className }: Prop) {
 
     return (
         <div onClick={router.back}>
-            <IconFlechaAtras className={`text-gray-500 cursor-pointer ${className && className}`} />
+            <IconFlechaAtras className={`cursor-pointer ${className && className}`} />
         </div>
     )
 }
