@@ -40,7 +40,7 @@ function ConvertToHtml({ savedContent, feed }: { savedContent: string, feed: boo
   return (
     <div className="relative">
       {loading ? (
-        <div className="text-center">Cargando contenido...</div>
+        <div className="w-full h-28 bg-FondoPrimary rounded mb-2 animate-pulse"></div>
       ) : (
         <>
           {feed ? (

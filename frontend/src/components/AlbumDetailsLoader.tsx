@@ -14,7 +14,18 @@ export default async function AlbumDetailsLoader({ id }: { id: string }) {
   const relatedAlbums = await getAlbumsByTag(album.tags[0]);
   const user: User | null = await getUserById(album.userId);
 
+
+  const commentsWithUsernames = await Promise.all(
+    album.comments.map(async (comment) => {
+      const user = await getUserById(comment.userId as string)
+      return {
+        ...comment,
+        username: user?.username || "Usuario desconocido",
+      }
+    })
+  )
+
   return (
-    <AlbumDetails album={album} relatedAlbums={relatedAlbums} user={user} />
+    <AlbumDetails album={album} relatedAlbums={relatedAlbums} user={user} comments={commentsWithUsernames} />
   );
 }

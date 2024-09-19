@@ -39,9 +39,16 @@ interface AlbumFromFetch {
   id: string
 }
 
+interface CommentFromFetch {
+  userId: string
+  content: string
+  _id: string
+  createdAt?: string
+}
+
 interface Comment {
+  _id?: string
   userId?: string
   content: string
-  _id?: string
-  createdAt?: string
+  username?: string
 }

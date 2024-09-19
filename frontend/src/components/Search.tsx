@@ -29,7 +29,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
   const debouncedFunction = debounce(handleSearch, 1000)
 
   return (
-    <div className="relative flex mt-16 mx-3 mb-2">
+    <div className="relative flex mt-20 mx-3 mb-2">
       <label htmlFor="search" className="sr-only">
         Search
       </label>

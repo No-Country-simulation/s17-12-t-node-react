@@ -1,51 +1,44 @@
-import { IconLocation } from "@/components/icons";
+import { IconLocation, IconPaper } from "@/components/icons";
 
 export function AlbumFeedSkeleton() {
-  const arrayOfFakeUsers = new Array(3)
+  const skeletonArray = Array(5).fill(0)
+
   return (
     <>
-      {arrayOfFakeUsers.map((item, index) => (
-        <div key={index} className='flex flex-col'>
-          <div className="rounded-full object-cover size-20 bg-FondoPrimary animate-pulse" />
-          <div className='bg-FondoPrimary w-12 h-6' />
-        </div>
-      ))}
+      {skeletonArray.map((_, index) => (
+        <div key={index} className="mt-10 border py-6 rounded-[30px] md:rounded-[50px] shadow-sombra animate-pulse">
 
-      {arrayOfFakeUsers.map((item, index) => (
-        <div key={index} className='mt-10 border bg-gray py-6 rounded-[30px] md:rounded-[50px] shadow-sombra'>
-          <div className="grid grid-cols-2 px-4">
+          <div className="grid grid-cols-2 px-4 text-TextPrimary">
             <div className="flex items-center gap-2">
-              <div className="object-cover size-11 rounded-full bg-FondoPrimary" />
-              <div className="bg-FondoPrimary w-12 h-6" />
+              <div className="w-11 h-11 rounded-full bg-FondoPrimary"></div>
+              <div className="w-24 h-6 bg-FondoPrimary rounded"></div>
             </div>
             <div className="flex items-center">
               <IconLocation />
-              <h2 className="w-48 h-6 bg-FondoPrimary" />
+              <div className="w-full h-6 bg-FondoPrimary rounded ml-2"></div>
+            </div>
+          </div>
+
+          <div className="w-full h-64 bg-FondoPrimary mt-4"></div>
+
+          <div className="flex justify-between py-4 px-4 text-TextPrimary">
+            <div className="flex gap-4">
+              <div className="w-10 h-10 bg-FondoPrimary rounded-full"></div>
+              <div className="w-10 h-10 bg-FondoPrimary rounded-full"></div>
+              <div className="w-10 h-10 bg-FondoPrimary rounded-full"></div>
             </div>
 
-            <div className="w-[459px] h-[216px] bg-FondoPrimary" />
+            <div className="w-10 h-10 bg-FondoPrimary rounded-full"></div>
+          </div>
 
-            <div className="flex justify-between">
-              <div className="flex gap-2">
-                <div className="bg-FondoPrimary rounded-full size-[30px]" />
-                <div className="bg-FondoPrimary rounded-full size-[30px]" />
-                <div className="bg-FondoPrimary rounded-full size-[30px]" />
-              </div>
-              <div className="bg-FondoPrimary rounded-full size-[30px]" />
-            </div>
-
-            <div className="flex flex-col">
-              <div className="w-32 h-6 bg-FondoPrimary" />
-              <div className="flex flex-col gap-1">
-                <div className="w-full h-6 bg-FondoPrimary" />
-                <div className="w-2/3 h-6 bg-FondoPrimary" />
-                <div className="w-full h-6 bg-FondoPrimary" />
-              </div>
-            </div>
-
+          <div className="flex flex-col flex-wrap px-4">
+            <div className="w-32 h-6 bg-FondoPrimary rounded mb-2"></div>
+            <div className="w-full h-28 bg-FondoPrimary rounded mb-2"></div>
+            <div className="w-20 h-6 bg-FondoPrimary rounded"></div>
           </div>
         </div>
       ))}
     </>
+
   );
 }

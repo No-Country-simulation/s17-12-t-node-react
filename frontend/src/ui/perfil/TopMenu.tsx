@@ -10,7 +10,7 @@ export default function TopMenu({ id }: { id: string }) {
 
 
     return (
-        <div className="flex justify-between bg-FondoPrimary pt-10 pb-2 px-2 text-white">
+        <div className="flex justify-between bg-FondoPrimary p-4 text-white">
             <Link href={'/'}>
                 <BackArrow />
             </Link>

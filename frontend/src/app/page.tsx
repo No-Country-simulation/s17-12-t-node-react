@@ -5,6 +5,7 @@ import logo from "/public/logo.svg"
 import { Footer } from "@/ui"
 import { Suspense } from "react"
 import Image from "next/image"
+import { AlbumFeedSkeleton } from "@/ui/skeleton"
 
 const BASE_URL = process.env.API_URL
 
@@ -37,12 +38,11 @@ export default async function Home() {
 
 
         {/* Card  */}
-        <Suspense>
+        <Suspense fallback={<AlbumFeedSkeleton />}>
           {albumResults.map((album) => (
             <CardFeed key={album.id} album={album} />
           ))}
         </Suspense>
-
       </div>
       <Footer />
     </>

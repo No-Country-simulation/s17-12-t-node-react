@@ -1,9 +1,6 @@
 import imageUser from "/public/feed/paisaje.jpg"
-import { IconConfig } from "@/components/icons";
-import { BackArrow } from "@/components";
 import { User } from "@/interfaces/user";
 import Image from "next/image";
-import Link from "next/link";
 import NavBar from "@/ui/perfil/NavBar";
 import TopMenu from "@/ui/perfil/TopMenu";
 
