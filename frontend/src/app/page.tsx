@@ -39,7 +39,7 @@ export default async function Home() {
 
         {/* Card  */}
         <Suspense fallback={<AlbumFeedSkeleton />}>
-          {albumResults.map((album) => (
+          {albumResults.reverse().map((album) => (
             <CardFeed key={album.id} album={album} />
           ))}
         </Suspense>

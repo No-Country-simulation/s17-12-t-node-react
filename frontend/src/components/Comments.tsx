@@ -64,7 +64,7 @@ export function Comments({ comments, albumId, feed }: CommentsProps) {
         </button>
       )}
       {showComments && (
-        <div className={`${feed ? 'absolute top-10 right-0 -left-[60px] min-w-[455px] w-[455px] h-max min-h-[250px] max-h-[500px] overflow-y-scroll bg-white border border-FondoPrimary shadow-lg z-10 rounded-lg p-4' : ''}`}>
+        <div className={`${feed ? 'absolute top-10 right-0 -left-[56px] min-w-[362px] w-[362px] h-max min-h-[250px] max-h-[500px] overflow-y-scroll bg-white border border-FondoPrimary shadow-lg z-10 rounded-lg p-4' : ''}`}>
           <div>
             <h3 className="text-lg font-semibold mb-2">Comentarios</h3>
             {allComments.length > 0 ? (
@@ -81,7 +81,7 @@ export function Comments({ comments, albumId, feed }: CommentsProps) {
             )}
           </div>
           {feed && (
-            <button type="button" onClick={() => setShowComments(!showComments)} className="absolute top-3 right-0 flex justify-center items-center text-lg font-bold bg-FondoPrimary text-white rounded-full size-7 cursor-pointer">x</button>
+            <button type="button" onClick={() => setShowComments(!showComments)} className="absolute top-3 right-2 flex justify-center items-center text-lg font-bold bg-FondoPrimary text-white rounded-full size-7 cursor-pointer">x</button>
           )}
           {token ? (
             <form className="mt-4" onSubmit={handleSubmit}>
@@ -101,7 +101,7 @@ export function Comments({ comments, albumId, feed }: CommentsProps) {
               {success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{success}</p>}
             </form>
           ) : (
-            <Link href="/login" className="flex justify-center items-center mt-3 bg-FondoPrimary text-white w-full text-xl rounded h-12">
+            <Link href="/login" className="flex justify-center items-center text-center mt-3 bg-FondoPrimary text-white w-full text-xl rounded h-16">
               Inicia Sesión/Registraté para comentar
             </Link>
           )}
