@@ -101,7 +101,7 @@ export function Comments({ comments, albumId, feed }: CommentsProps) {
               {success && <p className="-mt-4 mx-4 text-end text-green-500 text-xs">{success}</p>}
             </form>
           ) : (
-            <Link href="/login" className="flex justify-center items-center mt-3 bg-FondoPrimary text-white w-full text-xl rounded h-12">
+            <Link href="/login" className="flex justify-center items-center text-center mt-3 bg-FondoPrimary text-white w-full text-xl rounded h-16">
               Inicia Sesión/Registraté para comentar
             </Link>
           )}
